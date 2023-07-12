@@ -8,6 +8,7 @@ struct DiscoverListRouteBuilder: FeatureBuildType {
   
   func build(items: [String : String], diContainer: DIContainerType, navigator: NavigatorType) -> UIViewController {
     
+    // my lists에서 위시리스트랑 씬리스트 구분 할때 사용 가능?
     let itemList = items.getValue(Key: "itemList")
     
     return UIHostingController(

@@ -8,6 +8,8 @@ struct FeatureDIContainer {
     [
     MovieListRouteBuilder(),
     DiscoverListRouteBuilder(),
+    FanClubListRouteBuilder(),
+    MyListsListRouteBuilder(),
     ]
   }
 }

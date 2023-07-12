@@ -20,7 +20,7 @@ final class MovieListViewModel: ObservableObject {
       effector.routeToDiscover()
       return
       
-    case .loadItamList:
+    case .loadItemList:
       effector.getItemList { [weak self] itemList in
         self?.state.itemList = itemList
       }
@@ -36,7 +36,7 @@ extension MovieListViewModel {
   
   enum ViewAction: Equatable {
     case onTapDiscover
-    case loadItamList
+    case loadItemList
   }
 }
 

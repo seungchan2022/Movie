@@ -44,6 +44,10 @@ extension DiscoverListPage: View {
     }
     .sheet(isPresented: isShowSheet) {
       Text("시트 페이지")
+      
+      Button(action: { viewModel.send(action: .onChangeSheet(false)) }) {
+        Text("버튼으로 시트 닫기")
+      }
     }
   }
 }
