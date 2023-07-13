@@ -16,6 +16,10 @@ final class MovieListViewModel: ObservableObject {
   
   func send(action: ViewAction) {
     switch action {
+    case .onTapMovieDetailPage:
+      effector.routeToMovieDetailPage()
+      return
+      
     case .onTapDiscover:
       effector.routeToDiscover()
       return
@@ -35,6 +39,7 @@ extension MovieListViewModel {
   }
   
   enum ViewAction: Equatable {
+    case onTapMovieDetailPage
     case onTapDiscover
     case loadItemList
   }
@@ -44,7 +49,7 @@ extension MovieListViewModel.State {
   struct ScopeItem: Equatable {
     let imageURL: UIImage?
     let title: String
-    let date: Date
+    let date: String
     let rate: Double
     let summary: String
   }

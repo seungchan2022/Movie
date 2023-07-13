@@ -16,57 +16,105 @@ extension MovieListPage {
 }
 
 extension MovieListPage: View {
-  var body: some View {
-    // 서치
-    VStack {
-      HStack(spacing: 15) {
-        Image(systemName: "magnifyingglass")
-          .renderingMode(.template)
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .frame(width: 20, height: 20)
-        
-        TextField("Search any movie or person", text: $keyword)
-          .textFieldStyle(.plain)
-          .frame(height: 40)
-          .padding(.horizontal)
-          .background(
-            RoundedRectangle(cornerRadius: 5)
-              .stroke(.gray.opacity(0.7), lineWidth: 1))
-        
-          .focused($isFocused, equals: true)
-        if !keyword.isEmpty {
-          Button(action: { keyword = "" }) {
-            Text("Cancel")
-              .foregroundColor(.red)
-          }
-        }
-      }
-      .padding(.horizontal, 8)
-    }
-    .padding(.horizontal)
+  
+  var filteredItems: [MovieListViewModel.State.ScopeItem] {
+     if keyword.isEmpty {
+       return state.itemList
+     } else {
+       return state.itemList.filter {
+         $0.title.lowercased().contains(keyword.lowercased())
+       }
+     }
+   }
+
     
-    // 리스트
-    VStack {
-      Spacer()
-      Text("Movie list page")
-      
-      Button(action: { viewModel.send(action: .onTapDiscover)}) {
-        Text("디스커버리로 이동")
-      }
-      
-      ScrollView {
-        VStack {
-          ForEach(state.itemList, id: \.title) { item in
-            Text(item.title)
+  var body: some View {
+    ScrollView {
+      // 서치
+      VStack {
+        HStack(spacing: 15) {
+          Image(systemName: "magnifyingglass")
+            .renderingMode(.template)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 20, height: 20)
+          
+          TextField("Search any movie or person", text: $keyword)
+            .textFieldStyle(.plain)
+            .frame(height: 40)
+            .padding(.horizontal)
+            .background(
+              RoundedRectangle(cornerRadius: 5)
+                .stroke(.gray.opacity(0.2), lineWidth: 1))
+            .focused($isFocused, equals: true)
+              
+          if !keyword.isEmpty {
+            Button(action: { keyword = "" }) {
+              Text("Cancel")
+                .foregroundColor(.red)
+            }
           }
         }
+        .padding(.horizontal, 8)
+        
+        // 리스트
+        //      Spacer()
+        //      Text("Movie list page")
+        //
+        //      Button(action: { viewModel.send(action: .onTapDiscover)}) {
+        //        Text("디스커버리로 이동")
+        //      }
+        VStack {
+          ForEach(filteredItems, id: \.title) { item in
+            HStack(spacing: 16) {
+              Image(uiImage: item.imageURL ?? UIImage())
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 100, height: 160)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+              
+              VStack(alignment: .leading, spacing: 16) {
+                Spacer()
+                Text(item.title)
+                  .font(.system(size: 18, weight: .medium))
+                  .foregroundColor(.yellow)
+                
+                HStack(spacing: 5) {
+                  Image(systemName: "star.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 16, height: 16)
+                    .foregroundColor(Color(.systemRed))
+                  
+                  Text(String(format: "%.1f", item.rate))
+                  
+                  Text(item.date)
+                }
+                .font(.system(size: 16, weight: .medium))
+                
+                Text(item.summary)
+                  .font(.system(size: 16, weight: .medium))
+                  .foregroundColor(.gray)
+                
+                
+                Spacer()
+              }
+              
+              Spacer()
+            }
+            .frame(height: 200)
+            .onTapGesture {
+              viewModel.send(action: .onTapMovieDetailPage)
+            }
+          }
+        }
+        //      Spacer()
       }
-      Spacer()
-    }
+    } // 전체 view
     .onAppear {
       viewModel.send(action: .loadItemList)
     }
+    .navigationTitle("Now Playing")
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: { print("Setting")}) {
@@ -78,7 +126,7 @@ extension MovieListPage: View {
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: { isButtonClicked.toggle() }) {
-            Image(systemName: isButtonClicked ?  "rectangle.grid.1x2" : "rectangle.3.group.fill")
+          Image(systemName: isButtonClicked ?  "rectangle.grid.1x2" : "rectangle.3.group.fill")
         }
       }
     }

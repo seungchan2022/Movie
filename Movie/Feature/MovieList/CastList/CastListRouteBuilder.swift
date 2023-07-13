@@ -1,14 +1,15 @@
 import Foundation
 import SwiftUI
 
-struct MovieListRouteBuilder: FeatureBuildType {
+struct CastListRouteBuilder: FeatureBuildType {
   var featureName: String {
-    Link.movieList.rawValue
+    Link.castList.rawValue
   }
   
   func build(items: [String : String], diContainer: DIContainerType, navigator: NavigatorType) -> UIViewController {
+    
     return UIHostingController(
-      rootView: MovieListPage(
+      rootView: CastListPage(
         viewModel: .init(
           initialState: .init(),
           effector: .init(
@@ -16,4 +17,3 @@ struct MovieListRouteBuilder: FeatureBuildType {
             diContainer: diContainer))))
   }
 }
-

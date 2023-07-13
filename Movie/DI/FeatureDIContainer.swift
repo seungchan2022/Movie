@@ -10,6 +10,9 @@ struct FeatureDIContainer {
     DiscoverListRouteBuilder(),
     FanClubListRouteBuilder(),
     MyListsListRouteBuilder(),
+    MovieListDetailPageRouteBuilder(),
+    ReviewsRouteBuilder(),
+    CastListRouteBuilder(),
     ]
   }
 }

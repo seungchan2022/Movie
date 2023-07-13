@@ -5,4 +5,7 @@ enum Link: String {
   case discoverList
   case fanClubList
   case myListsList
+  case movieListDetail
+  case reviews
+  case castList
 }
