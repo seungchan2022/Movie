@@ -14,9 +14,29 @@ extension FanClubListEffector {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
       callback([
         .init(
-          profileImageURL: .none,
+          profileImageURL: UIImage(named: "alan"),
           name: "Alan Arkin",
-          work: "Edward Scissorhands"),
+          work: "Edward Scissorhands, Argo, Gattaca"),
+        .init(
+          profileImageURL: UIImage(named: "ana"),
+          name: "Ana de Armas",
+          work: "Blade Runner 2049, Knivees Out, War Dogs"),
+        .init(
+          profileImageURL: UIImage(named: "angeli"),
+          name: "Angeli Khan",
+          work: "Selina's Gold, Eva, Silip Sa Apoy"),
+        .init(
+          profileImageURL: UIImage(named: "angeli"),
+          name: "Angeli Khan",
+          work: "Selina's Gold, Eva, Silip Sa Apoy"),
+        .init(
+          profileImageURL: UIImage(named: "angeli"),
+          name: "Angeli Khan",
+          work: "Selina's Gold, Eva, Silip Sa Apoy"),
+        .init(
+          profileImageURL: UIImage(named: "angeli"),
+          name: "Angeli Khan",
+          work: "Selina's Gold, Eva, Silip Sa Apoy"),
       ])
     }
   }

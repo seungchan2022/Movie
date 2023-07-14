@@ -13,6 +13,7 @@ struct FeatureDIContainer {
     MovieListDetailPageRouteBuilder(),
     ReviewsRouteBuilder(),
     CastListRouteBuilder(),
+    DirectorPageRouteBuilder(),
     ]
   }
 }

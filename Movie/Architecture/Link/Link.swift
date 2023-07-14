@@ -8,4 +8,5 @@ enum Link: String {
   case movieListDetail
   case reviews
   case castList
+  case director
 }

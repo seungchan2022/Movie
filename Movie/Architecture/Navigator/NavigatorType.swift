@@ -10,3 +10,4 @@ protocol NavigatorType {
   func push(featureName: String, items: [String: String], isAnimation: Bool)
   func back(isAnimation: Bool)
 }
+

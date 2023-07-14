@@ -5,6 +5,7 @@ struct MovieListDetailPage {
   @ObservedObject var viewModel: MovieListDetailPageViewModel
   @State private var wishListSelected = false
   @State private var seenListSelected = false
+  @State private var isOverviewTapped = false
 }
 
 extension MovieListDetailPage {
@@ -243,17 +244,15 @@ extension MovieListDetailPage: View {
           Divider()
           
           HStack {
-            VStack {
+            VStack(alignment: .leading, spacing: 8) {
               Text("Overview:")
                 .font(.system(size: 18, weight: .bold))
               
-              Text("over view")
+              Text(isOverviewTapped ? "돔과 그의 패밀리 앞에 나타난 운명의 적 단테, 관거의 그림자는 돔의 모든 것을 파괴하기 위해 달려온다. 단테에 의해 산산히 흩어진 패밀리들은 모두 목숨을 걸고 맞서야 하는 함점에 빠지고 마는데..." : "돔과 그의 패밀리 앞에 나타난 운명의 적 단테, 관거의 그림자는 돔의 모든 것을 파괴하기 위해 달려온다..")
                 .foregroundColor(Color(.gray))
               
-              Button {
-                
-              } label: {
-                Text("Read more")
+              Button(action: { isOverviewTapped.toggle()}) {
+                Text(isOverviewTapped ? "Less" : "Read more")
                   .font(.system(size: 18, weight: .medium))
                   .foregroundColor(Color(.systemMint).opacity(0.5))
               }
@@ -261,12 +260,11 @@ extension MovieListDetailPage: View {
             Spacer()
           }
           .padding(.horizontal, 16)
-          
+          .padding(.bottom, 10)
           
         } // 위의 그룹
         .background(Color(.gray).opacity(0.2))
         .padding(.bottom, 20)
-        
         
         // 아래 그룹
         VStack {
@@ -376,75 +374,101 @@ extension MovieListDetailPage: View {
               )
             }
           }
-          
-          
           .padding()
           
           // MARK: - Cast
           VStack {
             HStack {
-                Text("Cast")
-                  .font(.system(size: 18, weight: .bold))
-                Text("See all")
-                  .font(.system(size: 18, weight: .medium))
-                  .foregroundColor(Color(.systemMint).opacity(0.5))
+              Text("Cast")
+                .font(.system(size: 18, weight: .bold))
+              Text("See all")
+                .font(.system(size: 18, weight: .medium))
+                .foregroundColor(Color(.systemMint).opacity(0.5))
               
               Spacer()
             }
             .padding(.top, 10)
             ScrollView(.horizontal, showsIndicators: false) {
-
-              Image("jason")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 60, height: 80)
-                .cornerRadius(10)
               
-              Text("Charlize Theron")
-                .font(.system(size: 18, weight: .bold))
-              Text("Cipher")
-                .font(.system(size: 14, weight: .light))
-                .foregroundColor(.gray)
-//
-//              Image("jason")
-//                .resizable()
-//                .scaledToFill()
-//                .frame(width: 60, height: 80)
-//
-//              Text("Charlize Theron")
-//                .font(.system(size: 18, weight: .bold))
-//              Text("Cipher")
-//                .font(.system(size: 14, weight: .light))
-//                .foregroundColor(.gray)
-//
-//
-//              Image("jason")
-//                .resizable()
-//                .scaledToFill()
-//                .frame(width: 60, height: 80)
-//
-//              Text("Charlize Theron")
-//                .font(.system(size: 18, weight: .bold))
-//              Text("Cipher")
-//                .font(.system(size: 14, weight: .light))
-//                .foregroundColor(.gray)
-//
-//
-//              Image("jason")
-//                .resizable()
-//                .scaledToFill()
-//                .frame(width: 60, height: 80)
-//
-//              Text("Charlize Theron")
-//                .font(.system(size: 18, weight: .bold))
-//              Text("Cipher")
-//                .font(.system(size: 14, weight: .light))
-//                .foregroundColor(.gray)
-
+              HStack(spacing: 20) {
+                VStack {
+                  Image("jason")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 80)
+                    .cornerRadius(10)
+                  
+                  Text("Jason Statham")
+                    .font(.system(size: 12, weight: .medium))
+                  Text("Shaw")
+                    .font(.system(size: 10, weight: .light))
+                    .foregroundColor(.gray)
+                }
+                
+                VStack {
+                  Image("charlize")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 80)
+                    .cornerRadius(10)
+                  
+                  Text("Charlize Theron")
+                    .font(.system(size: 12, weight: .medium))
+                  Text("Ciper")
+                    .font(.system(size: 10, weight: .light))
+                    .foregroundColor(.gray)
+                }
+                
+                VStack {
+                  Image("tyrese")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 80)
+                    .cornerRadius(10)
+                  
+                  Text("Tyrese Gibson")
+                    .font(.system(size: 12, weight: .medium))
+                  Text("Roman")
+                    .font(.system(size: 10, weight: .light))
+                    .foregroundColor(.gray)
+                }
+                VStack {
+                  Image("ludacris")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 80)
+                    .cornerRadius(10)
+                  
+                  Text("Ludacris")
+                    .font(.system(size: 12, weight: .medium))
+                  Text("Tej")
+                    .font(.system(size: 10, weight: .light))
+                    .foregroundColor(.gray)
+                }
+                
+              }
             }
           }
+          .padding(.horizontal, 16)
           .onTapGesture {
             viewModel.send(action: .onTapCastList)
+          }
+          
+          Divider()
+          
+          HStack {
+            Text("Director: ")
+              .font(.system(size: 16, weight: .medium))
+            Text("Louis Leterrier")
+              .font(.system(size: 14, weight: .light))
+              .foregroundColor(.gray)
+            
+            Spacer()
+          }
+          .padding(.horizontal, 16)
+          .padding(.bottom, 10)
+          .onTapGesture {
+            viewModel.send(action: .onTapDirector)
           }
           
         } // 아래 그룹

@@ -23,7 +23,12 @@ final class MovieListDetailPageViewModel: ObservableObject {
     case .onTapCastList:
       effector.routeToCastList()
       return
+      
+    case .onTapDirector:
+      effector.routeToDirector()
+      return
     }
+    
     
   }
 }
@@ -36,6 +41,7 @@ extension MovieListDetailPageViewModel {
   enum ViewAction: Equatable {
     case onTapReviews
     case onTapCastList
+    case onTapDirector
   }
 }
 

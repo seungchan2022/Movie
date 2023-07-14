@@ -26,6 +26,11 @@ final class MyListsListViewModel: ObservableObject {
       print("DEBUG: ", isShow)
       state.isShowSheet = isShow
       return
+      
+    case .onMovieDetail:
+      effector.routeToMovieDetail()
+      return
+      
     }
   }
 }
@@ -45,6 +50,7 @@ extension MyListsListViewModel {
     // 아이템
     case loadItemList
     case onChangeSheet(Bool)
+    case onMovieDetail
   }
 }
 
@@ -52,7 +58,7 @@ extension MyListsListViewModel.State {
   struct ScopeItem: Equatable {
     let imageURL: UIImage?
     let title: String
-    let date: Date
+    let date: String
     let rate: Double
     let summary: String
   }

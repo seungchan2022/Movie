@@ -25,5 +25,14 @@ extension MovieListDetailPageEffector {
         isAnimation: true)
     }
   }
+  
+  var routeToDirector: () -> Void {
+    {
+      navigator.push(
+        featureName: Link.director.rawValue,
+        items: [:],
+        isAnimation: true)
+    }
+  }
 }
 

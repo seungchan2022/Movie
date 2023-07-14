@@ -12,3 +12,4 @@ extension RootNavigator: UIViewControllerRepresentable {
   func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
   }
 }
+
