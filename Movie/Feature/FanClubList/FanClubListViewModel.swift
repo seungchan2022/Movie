@@ -21,6 +21,9 @@ final class FanClubListViewModel: ObservableObject {
         self?.state.profileList = profileList
       }
       return
+      
+    case .onTapProfile:
+      effector.routeToProfile()
     }
   }
 }
@@ -33,6 +36,7 @@ extension FanClubListViewModel {
   
   enum ViewAction: Equatable {
     case loadProfileList
+    case onTapProfile
   }
 }
 

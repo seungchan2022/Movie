@@ -8,6 +8,14 @@ struct FanClubListEffector {
 
 extension FanClubListEffector {
   // 프로필 디테일 페이지
+  var routeToProfile: () -> Void {
+    {
+      navigator.push(
+        featureName: Link.profile.rawValue,
+        items: [:],
+        isAnimation: true)
+    }
+  }
   
   // 프로필 데이터
   func getProfileList(callback: @escaping ([FanClubListViewModel.State.ScopeItem]) -> Void) {

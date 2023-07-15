@@ -40,6 +40,9 @@ extension FanClubListPage: View {
               
             }
             .frame(height: 120)
+            .onTapGesture {
+              viewModel.send(action: .onTapProfile)
+            }
           }
           
         } header: {

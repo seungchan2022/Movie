@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC03C5632A62773D00F16A53 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C5622A62773D00F16A53 /* ProfilePage.swift */; };
+		EC03C5652A62777200F16A53 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C5642A62777200F16A53 /* ProfileViewModel.swift */; };
+		EC03C5672A6277D700F16A53 /* ProfileEffector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C5662A6277D700F16A53 /* ProfileEffector.swift */; };
+		EC03C5692A6277FC00F16A53 /* ProfileRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C5682A6277FC00F16A53 /* ProfileRouteBuilder.swift */; };
 		EC6831152A600FA100C4E7C8 /* CastListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6831142A600FA100C4E7C8 /* CastListPage.swift */; };
 		EC6831172A600FE500C4E7C8 /* CastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6831162A600FE500C4E7C8 /* CastListViewModel.swift */; };
 		EC6831192A6011B200C4E7C8 /* CastListEffector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6831182A6011B200C4E7C8 /* CastListEffector.swift */; };
@@ -16,8 +20,6 @@
 		EC73E7182A6110F200801B49 /* DirectorPageEffector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC73E7172A6110F200801B49 /* DirectorPageEffector.swift */; };
 		EC73E71A2A61114000801B49 /* DirectorPageRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC73E7192A61114000801B49 /* DirectorPageRouteBuilder.swift */; };
 		EC73E71D2A61241F00801B49 /* CustomListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC73E71C2A61241F00801B49 /* CustomListPage.swift */; };
-		EC73E71F2A612DC300801B49 /* WishListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC73E71E2A612DC300801B49 /* WishListPage.swift */; };
-		EC73E7212A612DD700801B49 /* SeenListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC73E7202A612DD700801B49 /* SeenListPage.swift */; };
 		EC7606CC2A5E7AE200F732E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC7606CB2A5E7AE200F732E9 /* Assets.xcassets */; };
 		EC7606CF2A5E7AE200F732E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC7606CE2A5E7AE200F732E9 /* Preview Assets.xcassets */; };
 		EC7606F72A5E86AE00F732E9 /* NavigatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7606F62A5E86AE00F732E9 /* NavigatorType.swift */; };
@@ -59,6 +61,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC03C5622A62773D00F16A53 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
+		EC03C5642A62777200F16A53 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		EC03C5662A6277D700F16A53 /* ProfileEffector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEffector.swift; sourceTree = "<group>"; };
+		EC03C5682A6277FC00F16A53 /* ProfileRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteBuilder.swift; sourceTree = "<group>"; };
 		EC6831142A600FA100C4E7C8 /* CastListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastListPage.swift; sourceTree = "<group>"; };
 		EC6831162A600FE500C4E7C8 /* CastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastListViewModel.swift; sourceTree = "<group>"; };
 		EC6831182A6011B200C4E7C8 /* CastListEffector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastListEffector.swift; sourceTree = "<group>"; };
@@ -68,8 +74,6 @@
 		EC73E7172A6110F200801B49 /* DirectorPageEffector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectorPageEffector.swift; sourceTree = "<group>"; };
 		EC73E7192A61114000801B49 /* DirectorPageRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectorPageRouteBuilder.swift; sourceTree = "<group>"; };
 		EC73E71C2A61241F00801B49 /* CustomListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListPage.swift; sourceTree = "<group>"; };
-		EC73E71E2A612DC300801B49 /* WishListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListPage.swift; sourceTree = "<group>"; };
-		EC73E7202A612DD700801B49 /* SeenListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeenListPage.swift; sourceTree = "<group>"; };
 		EC7606C42A5E7ADF00F732E9 /* Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7606CB2A5E7AE200F732E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC7606CE2A5E7AE200F732E9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -122,6 +126,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC03C5612A62773000F16A53 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				EC03C5622A62773D00F16A53 /* ProfilePage.swift */,
+				EC03C5642A62777200F16A53 /* ProfileViewModel.swift */,
+				EC03C5662A6277D700F16A53 /* ProfileEffector.swift */,
+				EC03C5682A6277FC00F16A53 /* ProfileRouteBuilder.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		EC6831132A600F8B00C4E7C8 /* CastList */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,8 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				EC73E71C2A61241F00801B49 /* CustomListPage.swift */,
-				EC73E71E2A612DC300801B49 /* WishListPage.swift */,
-				EC73E7202A612DD700801B49 /* SeenListPage.swift */,
 			);
 			path = MyListsDetail;
 			sourceTree = "<group>";
@@ -288,6 +301,7 @@
 		ECA2CF282A5EC707006A9BEF /* FanClubList */ = {
 			isa = PBXGroup;
 			children = (
+				EC03C5612A62773000F16A53 /* Profile */,
 				ECA2CF2A2A5EC73B006A9BEF /* FanClubListPage.swift */,
 				ECA2CF2C2A5EC7B4006A9BEF /* FanClubListViewModel.swift */,
 				ECA2CF2E2A5EC969006A9BEF /* FanClubListEffector.swift */,
@@ -419,6 +433,7 @@
 				EC7607132A5E8CF200F732E9 /* Link.swift in Sources */,
 				EC6831152A600FA100C4E7C8 /* CastListPage.swift in Sources */,
 				EC7607172A5E8ED400F732E9 /* MovieListPage.swift in Sources */,
+				EC03C5632A62773D00F16A53 /* ProfilePage.swift in Sources */,
 				EC7607042A5E88A800F732E9 /* AppDIContainer.swift in Sources */,
 				ECA2CF2D2A5EC7B4006A9BEF /* FanClubListViewModel.swift in Sources */,
 				EC73E71A2A61114000801B49 /* DirectorPageRouteBuilder.swift in Sources */,
@@ -430,15 +445,16 @@
 				ECA995FD2A5FF6E8006C7F57 /* ReviewsEffector.swift in Sources */,
 				ECA995FF2A5FF702006C7F57 /* ReviewsRouteBuilder.swift in Sources */,
 				EC6831172A600FE500C4E7C8 /* CastListViewModel.swift in Sources */,
-				EC73E71F2A612DC300801B49 /* WishListPage.swift in Sources */,
 				EC73E71D2A61241F00801B49 /* CustomListPage.swift in Sources */,
+				EC03C5672A6277D700F16A53 /* ProfileEffector.swift in Sources */,
 				EC68311B2A60131000C4E7C8 /* CastListRouteBuilder.swift in Sources */,
 				EC7607232A5E926F00F732E9 /* DiscoverListViewModel.swift in Sources */,
 				ECA2CF332A5ECFDF006A9BEF /* MyListsListPage.swift in Sources */,
+				EC03C5652A62777200F16A53 /* ProfileViewModel.swift in Sources */,
 				ECD2C1362A5FD1C800B49C99 /* MovieListDetailPageViewModel.swift in Sources */,
 				EC6831192A6011B200C4E7C8 /* CastListEffector.swift in Sources */,
 				ECA2CF352A5ED036006A9BEF /* MyListsListViewModel.swift in Sources */,
-				EC73E7212A612DD700801B49 /* SeenListPage.swift in Sources */,
+				EC03C5692A6277FC00F16A53 /* ProfileRouteBuilder.swift in Sources */,
 				EC7607082A5E896300F732E9 /* FeatureBuildType.swift in Sources */,
 				EC7607022A5E889300F732E9 /* DIContainerType.swift in Sources */,
 				ECD2C1382A5FD27E00B49C99 /* MovieListDetailPageEffector.swift in Sources */,

@@ -184,11 +184,12 @@ extension MyListsListPage: View {
           }
         } // wishlist, seenlist
         .onTapGesture {
-          viewModel.send(action: .onMovieDetail)
+          viewModel.send(action: .onShowMovieDetail)
         }
         
       } // 전체 vstack
-    }
+    } // 전체 scrollView
+    
     .onAppear {
       viewModel.send(action: .loadItemList)
     }
@@ -196,6 +197,7 @@ extension MyListsListPage: View {
       CustomListsPage()
     }
     
+    .navigationTitle("My Lists")
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: { print("Setting")}) {

@@ -1,14 +1,14 @@
 import Foundation
 import UIKit
 
-final class MyListsListViewModel: ObservableObject {
+final class ProfileViewModel: ObservableObject {
   
   @Published var state: State
-  private let effector: MyListsListEffector
+  private let effector: ProfileEffector
   
   init(
     initialState: State,
-    effector: MyListsListEffector)
+    effector: ProfileEffector)
   {
     self.state = initialState
     self.effector = effector
@@ -22,44 +22,26 @@ final class MyListsListViewModel: ObservableObject {
       }
       return
       
-    case .onChangeSheet(let isShow):
-      print("DEBUG: ", isShow)
-      state.isShowSheet = isShow
-      return
-      
     case .onShowMovieDetail:
       effector.routeToMovieDetail()
-      return
-      
     }
   }
 }
 
-extension MyListsListViewModel {
+extension ProfileViewModel {
   struct State: Equatable {
     var itemList: [State.ScopeItem] = []
-    var isShowSheet: Bool
-    
-    init(isShowSheet: Bool = false) {
-      self.isShowSheet = isShowSheet
-    }
   }
   
   enum ViewAction: Equatable {
-    // 디테일 페이지 액션도 구현
-    // 아이템
     case loadItemList
-    case onChangeSheet(Bool)
     case onShowMovieDetail
   }
 }
 
-extension MyListsListViewModel.State {
+extension ProfileViewModel.State {
   struct ScopeItem: Equatable {
-    let imageURL: UIImage?
+    let image: UIImage?
     let title: String
-    let date: String
-    let rate: Double
-    let summary: String
   }
 }

@@ -9,4 +9,5 @@ enum Link: String {
   case reviews
   case castList
   case director
+  case profile
 }
