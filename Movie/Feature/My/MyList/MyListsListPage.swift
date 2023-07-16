@@ -3,20 +3,20 @@ import SwiftUI
 
 // movies의 데이터와 같은데 여기서는 위시리스트랑 씬리스트로 나누어서 구분 하는 것뿐 -> 보이는 UI와 눌렀을때 보이는 것은 같음 => 어떻게 구조를 짜야되나... => 일단 각자 구성하고 나중에 재사용되는 부분 정리해서 표현해보기
 struct MyListsListPage {
-  @ObservedObject var viewModel: MyListsListViewModel
-  @State private var isShowingWishList = true
-  @State private var isShowingSeenList = false
+  @ObservedObject var viewStore: MyListsListStore
+//  @State private var isShowingWishList = true
+//  @State private var isShowingSeenList = false
 }
 
 extension MyListsListPage {
-  var state: MyListsListViewModel.State {
-    viewModel.state
+  var state: MyListsListStore.State {
+    viewStore.state
   }
   
   private var isShowSheet: Binding<Bool> {
     .init(
       get: { state.isShowSheet },
-      set: { viewModel.send(action: .onChangeSheet($0)) })
+      set: { viewStore.send(.onChangeSheet($0)) })
   }
 }
 
@@ -30,7 +30,7 @@ extension MyListsListPage: View {
             .foregroundColor(.gray)
             .padding(.horizontal, 10)
           if !state.isShowSheet {
-            Button(action: { viewModel.send(action: .onChangeSheet(true)) }) {
+            Button(action: { viewStore.send( .onChangeSheet(true)) }) {
               Text("Create Custom list")
                 .font(.system(size: 18, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -50,25 +50,27 @@ extension MyListsListPage: View {
           
           HStack(spacing: 0) {
             Button {
-              isShowingWishList = true
-              isShowingSeenList = false
+//              isShowingWishList = true
+//              isShowingSeenList = false
+              viewStore.send(.onChangeShowType(.wishList))
             } label: {
               Text("Wishlist")
             }
             .frame(width: 150, height: 30)
             //        .clipShape(Capsule())
-            .background(isShowingWishList ? Color.gray.opacity(0.7) : Color.gray.opacity(0.3))
+            .background(state.showType == .wishList ? Color.gray.opacity(0.7) : Color.gray.opacity(0.3))
             .foregroundColor(.white)
             .cornerRadius(10)
             
             Button {
-              isShowingSeenList = true
-              isShowingWishList = false
+//              isShowingSeenList = true
+//              isShowingWishList = false
+              viewStore.send(.onChangeShowType(.seenList))
             } label: {
               Text("Seenlist")
             }
             .frame(width: 150, height: 30)
-            .background(isShowingSeenList ? Color.gray.opacity(0.7) : Color.gray.opacity(0.3))
+            .background(state.showType == .seenList ? Color.gray.opacity(0.7) : Color.gray.opacity(0.3))
             .foregroundColor(.white)
             .cornerRadius(10)
           }
@@ -79,7 +81,7 @@ extension MyListsListPage: View {
         // => wishlist를 누르면 wishlistpage가 나오고
         
         VStack(alignment: .leading) {
-          if isShowingWishList {
+          if state.showType == .wishList {
             Text("\(state.itemList.count) MOVES IN WISHLIST (BY RELEASE DATE)")
               .font(.system(size: 14, weight: .medium))
               .foregroundColor(.gray)
@@ -128,10 +130,9 @@ extension MyListsListPage: View {
                 .frame(height: 180)
               }
             }
-            
           }
           
-          if isShowingSeenList {
+          if state.showType == .seenList  {
             Text("2 MOVES IN WISHLIST (BY RELEASE DATE)")
               .font(.system(size: 14, weight: .medium))
               .foregroundColor(.gray)
@@ -184,15 +185,12 @@ extension MyListsListPage: View {
           }
         } // wishlist, seenlist
         .onTapGesture {
-          viewModel.send(action: .onShowMovieDetail)
+          viewStore.send(.onShowMovieDetail)
         }
         
       } // 전체 vstack
     } // 전체 scrollView
     
-    .onAppear {
-      viewModel.send(action: .loadItemList)
-    }
     .sheet(isPresented: isShowSheet) {
       CustomListsPage()
     }
@@ -205,6 +203,9 @@ extension MyListsListPage: View {
           
         }
       }
+    }
+    .onAppear {
+      viewStore.send(.loadItemList)
     }
   }
 }

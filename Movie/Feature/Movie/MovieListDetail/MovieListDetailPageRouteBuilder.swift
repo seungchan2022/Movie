@@ -10,11 +10,17 @@ struct MovieListDetailPageRouteBuilder: FeatureBuildType {
     
     return UIHostingController(
       rootView: MovieListDetailPage(
-        viewModel: .init(
-          initialState: .init(),
+        viewStore: .init(
+          initialState: .init(
+            movieItemID: items.getValue(key: "movieItemID")),
           effector: .init(
             navigator: navigator,
             diContainer: diContainer))))
   }
 }
 
+extension [String: String] {
+  fileprivate func getValue(key: String) -> String {
+    first(where: { $0.key == key })?.value ?? ""
+  }
+}

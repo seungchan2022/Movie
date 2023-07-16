@@ -1,20 +1,18 @@
 import Foundation
 import SwiftUI
 
-struct MovieListRouteBuilder: FeatureBuildType {
+struct MyListsListRouteBuilder: FeatureBuildType {
   var featureName: String {
-    Link.movieList.rawValue
+    Link.myListsList.rawValue
   }
   
   func build(items: [String : String], diContainer: DIContainerType, navigator: NavigatorType) -> UIViewController {
     return UIHostingController(
-      rootView: MovieListPage(
-        viewModel: .init(
+      rootView: MyListsListPage(
+        viewStore: .init(
           initialState: .init(),
           effector: .init(
             navigator: navigator,
             diContainer: diContainer))))
   }
 }
-
-
