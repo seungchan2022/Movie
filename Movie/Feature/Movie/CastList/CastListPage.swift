@@ -2,44 +2,32 @@ import Foundation
 import SwiftUI
 
 struct CastListPage {
-  @ObservedObject var viewModel: CastListViewModel
+  @ObservedObject var viewStore: CastListStore
 }
 
 extension CastListPage {
-  var state: CastListViewModel.State {
-    viewModel.state
+  var state: CastListStore.State {
+    viewStore.state
   }
 }
 
 extension CastListPage: View {
   var body: some View {
-    Text("Cast page")
-    List{
-      ForEach(state.profileList, id: \.name) { profile in
-        HStack(spacing: 10) {
-          Image(uiImage: profile.profileImage ?? UIImage())
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 60, height: 80)
-          
-          VStack(alignment: .leading, spacing: 8) {
-            Spacer()
-            
-            Text(profile.name)
-              .font(.system(size: 18, weight: .bold))
-            Text(profile.character)
-              .font(.system(size: 14, weight: .medium))
-              .foregroundColor(.gray)
-            
-            Spacer()
+    List {
+      ForEach(state.itemList) { item in
+        if item.movieItemId == state.movieItemID {
+          VStack {
+            Text(item.name)
+            Text(item.id)
           }
-          
         }
-        .frame(height: 120)
       }
     }
     .onAppear {
-      viewModel.send(action: .loadProfileList )
+      viewStore.send(.loadItemList)
     }
   }
 }
+
+// $0.movieItemId는 CastListstotr.state.scopeItem이고, state.movieItemID는 처음 무비 화면에서 계속 클릭하면서 각 아이템을 구분하면서 계속 들어오는 movieItemID이다 !!!!
+// => 어지럽고, 헷갈린다...

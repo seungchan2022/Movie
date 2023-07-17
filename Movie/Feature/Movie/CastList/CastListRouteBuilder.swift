@@ -10,8 +10,8 @@ struct CastListRouteBuilder: FeatureBuildType {
     
     return UIHostingController(
       rootView: CastListPage(
-        viewModel: .init(
-          initialState: .init(),
+        viewStore: .init(
+          initialState: .init(movieItemID: items.getValue(key: "movieItemID")),
           effector: .init(
             navigator: navigator,
             diContainer: diContainer))))

@@ -1,20 +1,20 @@
 import Foundation
 import UIKit
 
-final class DirectorStore: ObservableObject, Store {
-  
+final class ReviewsStore: ObservableObject, Store {
+
   @Published var state: State
-  private let effector: DirectorPageEffector
+  let effector: ReviewsEffector
   
   init(
     initialState state: State,
-    effector: DirectorPageEffector)
+    effector: ReviewsEffector)
   {
     self.state = state
     self.effector = effector
   }
   
-  var reduce: (State, Action, Effector) async -> State {
+  var reduce: (State, Action, ReviewsEffector) async -> State {
     { state, action, effector in
       var newState = state
       
@@ -27,7 +27,7 @@ final class DirectorStore: ObservableObject, Store {
   }
 }
 
-extension DirectorPage {
+extension ReviewsStore {
   struct State: Equatable {
     let movieItemID: String
     var itemList: [State.ScopeItem] = []
@@ -38,10 +38,9 @@ extension DirectorPage {
   }
 }
 
-extension DirectorPage.State {
+extension ReviewsStore.State {
   struct ScopeItem: Equatable, Identifiable {
     let id: String
-    let movieItemId: String
-    let name: String
+    let reviews: String
   }
 }

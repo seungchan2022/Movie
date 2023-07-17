@@ -7,12 +7,15 @@ struct ReviewsRouteBuilder: FeatureBuildType {
   }
   
   func build(items: [String : String], diContainer: DIContainerType, navigator: NavigatorType) -> UIViewController {
-    
+   
     return UIHostingController(
       rootView: ReviewsPage(
-        viewModel: .init(
+        viewStore: .init(
+          initialState: .init(
+            movieItemID: items.getValue(key: "movieItemID")),
           effector: .init(
             navigator: navigator,
             diContainer: diContainer))))
   }
 }
+

@@ -58,7 +58,7 @@ extension CustomListsPage: View {
             .padding(EdgeInsets(top: 2, leading: 4, bottom: 2, trailing: 4))
             .background(
               RoundedRectangle(cornerRadius: 5)
-                .fill(.black))
+                .stroke(Color(.systemGray), lineWidth: 1))
         }
         .frame(width: 320 ,height: 50)
         .padding(.horizontal, 16)

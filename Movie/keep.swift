@@ -476,3 +476,34 @@
 //    }
 //  }
 //}
+
+
+//@State private var isOverviewTapped = false
+
+
+//{
+//  ForEach(state.itemList) { item in
+//    //        if let selecedItem = state.itemList.first(where: { $0.movieItemId == state.movieItemID}) {
+//    HStack(spacing: 10) {
+//      Image(uiImage: item.profileImage ?? UIImage())
+//        .resizable()
+//        .aspectRatio(contentMode: .fill)
+//        .frame(width: 60, height: 80)
+//        .cornerRadius(10)
+//      
+//      VStack(alignment: .leading, spacing: 8) {
+//        Spacer()
+//        Text(item.name)
+//          .font(.system(size: 18, weight: .bold))
+//        Text(item.character)
+//          .font(.system(size: 14, weight: .medium))
+//          .foregroundColor(.gray)
+//        
+//        Spacer()
+//      }
+//    }.frame(height: 120)
+//    
+//    //        Text(item.id)
+//    //        Text(item.name)
+//  }
+//}

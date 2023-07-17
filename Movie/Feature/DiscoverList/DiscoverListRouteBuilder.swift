@@ -24,7 +24,7 @@ struct DiscoverListRouteBuilder: FeatureBuildType {
 }
 
 extension [String: String] {
-  func getValue(Key: String) -> String? {
+  fileprivate func getValue(Key: String) -> String? {
     first(where:  { $0.key == Key })?.value
   }
 }

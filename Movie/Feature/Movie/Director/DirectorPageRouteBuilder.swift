@@ -10,7 +10,9 @@ struct DirectorPageRouteBuilder: FeatureBuildType {
   
     return UIHostingController(
       rootView: DirectorPage(
-        viewModel: .init(
+        viewStore: .init(
+          initialState: .init(
+            movieItemID: items.getValue(key: "movieItemID")),
           effector: .init(
             navigator: navigator,
             diContainer: diContainer))))
