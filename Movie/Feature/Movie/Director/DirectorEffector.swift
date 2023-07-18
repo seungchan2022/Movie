@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 struct DirectorEffector {
   let navigator: NavigatorType
@@ -13,17 +14,17 @@ extension DirectorEffector {
       
       return [
         .init(
-          id: "영화 감독 이름",
+          id: "The director ID of the fastx",
           movieItemId: "fastx",
-          name: "영화 감독 이름"),
+          name: "The director name of fastx"),
         .init(
-          id: "영화 감독 이름1",
+          id: "The director ID of the transformer",
           movieItemId: "transformer",
-          name: "영화 감독 이름1"),
+          name: "The director name of transformer"),
         .init(
-          id: "영화 감독 이름3",
+          id: "The director ID of the spiderman",
           movieItemId: "spiderman",
-          name: "영화 감독 이름3"),
+          name: "The director name of spidemran"),
       ]
     }
   }

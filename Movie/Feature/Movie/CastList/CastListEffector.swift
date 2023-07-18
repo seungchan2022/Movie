@@ -45,13 +45,13 @@ extension CastListEffector {
               id: "123",
               movieItemId: "transformer",
               profileImage: .none,
-              name: "123",
+              name: "The cast of transformer",
               character: "onetwothree"),
           .init(
             id: "5153",
             movieItemId: "spiderman",
             profileImage: .none,
-            name: "5125125",
+            name: "The cast of spiderman",
             character: "dgml,djglkdjsgkl"),
       ]
     }

@@ -15,7 +15,6 @@ extension MovieListDetailPage.MovieReviewComponent: View {
       .onTapGesture {
         tapAction(viewState.item)
       }
-
   }
 }
 

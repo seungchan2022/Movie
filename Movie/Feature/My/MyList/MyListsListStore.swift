@@ -22,31 +22,43 @@ final class MyListsListStore: ObservableObject, Store {
       case .loadItemList:
         newState.itemList = await effector.itemList()
         return newState
-        
+                
       case .onChangeSheet(let isShow):
         print("DEBUG: ", isShow)
         newState.isShowSheet = isShow
         return newState
         
-      case .onChangeShowType(let type):
-        print("type", type)
+      case .loadWishItemList:
+        newState.wishItemList = await effector.wishItemList()
+        newState.showType = .wishList
+        return newState
+
+      case .loadSeenItemList:
+        newState.seenItemList = await effector.seenItemList()
+        newState.showType = .seenList
         return newState
         
-      case .onShowMovieDetail:
-        effector.routeToMovieDetail()
+      case .onChangeShowType(let type):
+        print("type", type)
+          newState.showType = type
         return newState
-//      case .onSelectDetailItem(let item):
-//        effector.routeToMovieDetailPage(item)
+        
+//      case .onShowMovieDetail:
+//        effector.routeToMovieDetail()
 //        return newState
+              case .onSelectDetailItem(let item):
+                effector.routeToMovieDetailPage(item)
+                return newState
       }
     }
   }
-  
 }
 
 extension MyListsListStore {
   struct State: Equatable {
     var itemList: [State.ScopeItem] = []
+    var wishItemList: [State.ScopeItem] = []
+    var seenItemList: [State.ScopeItem] = []
     var isShowSheet: Bool
     var showType: ShowType = .wishList
     
@@ -59,10 +71,12 @@ extension MyListsListStore {
     // 디테일 페이지 액션도 구현
     // 아이템
     case loadItemList
+    case loadWishItemList
+    case loadSeenItemList
     case onChangeSheet(Bool)
     case onChangeShowType(MyListsListStore.State.ShowType)
-    case onShowMovieDetail
-//    case onSelectDetailItem(MovieListStore.State.ScopeItem)
+//    case onShowMovieDetail
+        case onSelectDetailItem(MovieListStore.State.ScopeItem)
   }
 }
 
