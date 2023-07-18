@@ -2,14 +2,14 @@ import Foundation
 import SwiftUI
 
 struct ProfilePage {
-  @ObservedObject var viewModel: ProfileViewModel
+  @ObservedObject var viewStore: ProfileStore
   @State private var clickFanButton = false
   @State private var isBiographyTapped = false
 }
 
 extension ProfilePage {
-  var state: ProfileViewModel.State {
-    viewModel.state
+  var state: ProfileStore.State {
+    viewStore.state
   }
 }
 
@@ -127,7 +127,8 @@ extension ProfilePage: View {
           }
           .onTapGesture {
             // detail page
-            viewModel.send(action: .onShowMovieDetail)
+            viewStore.send(.onShowMovieDetail)
+            
           }
           .listRowInsets(EdgeInsets())
         }
@@ -153,9 +154,6 @@ extension ProfilePage: View {
       
       
     }
-    .onAppear {
-      viewModel.send(action: .loadItemList)
-    }
     .listStyle(.plain)
 
     .toolbar {
@@ -171,6 +169,10 @@ extension ProfilePage: View {
             .foregroundColor(clickFanButton ? .yellow : .white)
         }
       }
+    }
+    
+    .onAppear {
+      viewStore.send(.loadItemList)
     }
   }
 }

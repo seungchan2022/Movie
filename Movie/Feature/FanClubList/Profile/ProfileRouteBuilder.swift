@@ -10,7 +10,7 @@ struct ProfileRouteBuilder: FeatureBuildType {
     
     return UIHostingController(
       rootView: ProfilePage(
-        viewModel: .init(
+        viewStore: .init(
           initialState: .init(),
           effector: .init(
             navigator: navigator,

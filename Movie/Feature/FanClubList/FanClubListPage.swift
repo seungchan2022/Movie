@@ -2,13 +2,13 @@ import Foundation
 import SwiftUI
 
 struct FanClubListPage {
-  @ObservedObject var viewModel: FanClubListViewModel
+  @ObservedObject var viewStore: FanClubListStore
   @State private var scrollToTop = false
 }
 
 extension FanClubListPage {
-  var state: FanClubListViewModel.State {
-    viewModel.state
+  var state: FanClubListStore.State {
+    viewStore.state
   }
 }
 
@@ -18,7 +18,7 @@ extension FanClubListPage: View {
       List {
         Section {
           
-          ForEach(state.profileList, id: \.name) { profile in
+          ForEach(state.itemList, id: \.name) { profile in
             HStack(spacing: 10) {
               Image(uiImage: profile.profileImageURL ?? UIImage())
                 .resizable()
@@ -41,7 +41,7 @@ extension FanClubListPage: View {
             }
             .frame(height: 120)
             .onTapGesture {
-              viewModel.send(action: .onTapProfile)
+              viewStore.send(.onTapProfile)
             }
           }
           
@@ -57,9 +57,8 @@ extension FanClubListPage: View {
       .listStyle(.plain)
     }
     .navigationTitle("Fan Club")
-    .navigationBarTitleDisplayMode(.large)
     .onAppear {
-      viewModel.send(action: .loadProfileList)
+      viewStore.send(.loadProfileList)
     }
   }
 }

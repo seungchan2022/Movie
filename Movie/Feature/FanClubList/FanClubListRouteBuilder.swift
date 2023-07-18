@@ -10,7 +10,7 @@ struct FanClubListRouteBuilder: FeatureBuildType {
     
     return UIHostingController(
       rootView: FanClubListPage(
-        viewModel: .init(
+        viewStore: .init(
           initialState: .init(),
           effector: .init(
             navigator: navigator,

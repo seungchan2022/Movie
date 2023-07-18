@@ -2,18 +2,18 @@ import Foundation
 import SwiftUI
 
 struct DiscoverListPage {
-  @ObservedObject var viewModel: DiscoverListViewModel
+  @ObservedObject var viewStore: DiscoverListStore
 }
 
 extension DiscoverListPage {
-  var state: DiscoverListViewModel.State {
-    viewModel.state
+  var state: DiscoverListStore.State {
+    viewStore.state
   }
   
   private var isShowSheet: Binding<Bool> {
     .init(
       get: { state.isShowSheet },
-      set: { viewModel.send(action: .onChangeSheet($0)) })
+      set: { viewStore.send(.onChangeSheet($0)) })
   }
 
 }
@@ -26,17 +26,17 @@ extension DiscoverListPage: View {
       Text("Item is \(state.itemList)")
       
       if state.itemList.isEmpty {
-        Button(action: { viewModel.send(action: .onTapItemListReset)}) {
+        Button(action: { viewStore.send( .onTapItemListReset)}) {
           Text("아이템 복구")
         }
       } else {
-        Button(action: { viewModel.send(action: .onTapItemListClear)}) {
+        Button(action: { viewStore.send( .onTapItemListClear)}) {
           Text("아이템 지워줘")
         }
       }
       
       if !state.isShowSheet {
-        Button(action: { viewModel.send(action: .onChangeSheet(true))}) {
+        Button(action: { viewStore.send( .onChangeSheet(true))}) {
           Text("시트를 띄워줘")
         }
       }
@@ -45,7 +45,7 @@ extension DiscoverListPage: View {
     .sheet(isPresented: isShowSheet) {
       Text("시트 페이지")
       
-      Button(action: { viewModel.send(action: .onChangeSheet(false)) }) {
+      Button(action: { viewStore.send( .onChangeSheet(false)) }) {
         Text("버튼으로 시트 닫기")
       }
     }

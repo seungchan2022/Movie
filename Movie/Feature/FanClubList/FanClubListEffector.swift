@@ -18,9 +18,11 @@ extension FanClubListEffector {
   }
   
   // 프로필 데이터
-  func getProfileList(callback: @escaping ([FanClubListViewModel.State.ScopeItem]) -> Void) {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-      callback([
+  var itemList: () async -> [FanClubListStore.State.ScopeItem] {
+    {
+      let _ = try? await Task.sleep(for: .zero)
+      
+      return [
         .init(
           profileImageURL: UIImage(named: "alan"),
           name: "Alan Arkin",
@@ -45,7 +47,8 @@ extension FanClubListEffector {
           profileImageURL: UIImage(named: "angeli"),
           name: "Angeli Khan",
           work: "Selina's Gold, Eva, Silip Sa Apoy"),
-      ])
+
+      ]
     }
   }
 }

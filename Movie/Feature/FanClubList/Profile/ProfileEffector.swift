@@ -16,13 +16,22 @@ extension ProfileEffector {
     }
   }
   
-  func getItemList(callback: @escaping ([ProfileViewModel.State.ScopeItem]) -> Void) {
-    DispatchQueue.main.asyncAfter(deadline: .now()) {
-      callback([
-        .init(image: UIImage(named: "fastx"), title: "분노의 질주"),
-        .init(image: UIImage(named: "transformer"), title: "트랜스포머"),
-        .init(image: UIImage(named: "spiderman"), title: "스파이더맨"),
-      ])
+  var itemList: () async -> [ProfileStore.State.ScopeItem] {
+    {
+      let _ = try? await Task.sleep(for: .zero)
+      
+      return [
+        .init(
+          image: UIImage(named: "fastx"),
+          title: "분노의 질주"),
+        .init(
+          image: UIImage(
+          named: "transformer"),
+              title: "트랜스포머"),
+        .init(
+          image: UIImage(named: "spiderman"),
+          title: "스파이더맨"),
+      ]
     }
   }
 }

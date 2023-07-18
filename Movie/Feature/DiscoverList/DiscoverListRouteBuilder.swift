@@ -13,7 +13,7 @@ struct DiscoverListRouteBuilder: FeatureBuildType {
     
     return UIHostingController(
       rootView: DiscoverListPage(
-        viewModel: .init(
+        viewStore: .init(
           initialState: .init(
             itemList: itemList ?? "",
             tempList: itemList ?? ""),
