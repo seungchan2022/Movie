@@ -22,7 +22,7 @@ final class MovieListDetailStore: ObservableObject, Store {
       case .onTapReviews(let item):
         effector.routeToReviews(item)
         return newState
-        
+                
       case .onTapCastList(let item):
         effector.routeToCastList(item)
         return newState
@@ -45,8 +45,10 @@ extension MovieListDetailStore {
     var itemList: [State.ScopeItem] = []
   }
   
+  
   enum Action: Equatable {
     case onTapReviews(MovieListDetailStore.State.ScopeItem)
+
     case onTapCastList(MovieListDetailStore.State.ScopeItem)
     case onTapDirector(MovieListDetailStore.State.ScopeItem)
     case loadItemList
@@ -67,7 +69,7 @@ extension MovieListDetailStore.State {
     let reviews: String
     let overview: String
     let keywords: [String]
-//    let cast: [String]
+    //    let cast: [String]
     let director: String
   }
 }

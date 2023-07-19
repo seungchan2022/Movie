@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import DesignSystem
 
 extension MovieListDetailPage {
   struct MovieCardComponent {
@@ -18,12 +19,14 @@ extension MovieListDetailPage.MovieCardComponent: View {
           .frame(width: 120, height: 160)
           .clipShape(RoundedRectangle(cornerRadius: 10))
         
-        VStack {
+        VStack(alignment: .leading) {
           Spacer()
           
-          Text("\(viewState.item.year) • ") +
-          Text("\(viewState.item.runningTime) • ") +
-          Text(viewState.item.release)
+          Group {
+            Text("\(viewState.item.year) • ") +
+            Text("\(viewState.item.runningTime) minutes • ") +
+            Text(viewState.item.release)
+          }
           
           Spacer()
           
@@ -32,7 +35,7 @@ extension MovieListDetailPage.MovieCardComponent: View {
               .resizable()
               .aspectRatio(contentMode: .fit)
               .frame(width: 16, height: 16)
-              .foregroundColor(Color(.systemRed))
+              .foregroundColor(AppColor.Tint.primary)
             Text(String(format: "%.1f", viewState.item.rate))
             Text("\(viewState.item.comments) ratings")
             
@@ -41,6 +44,8 @@ extension MovieListDetailPage.MovieCardComponent: View {
           Spacer()
         }
         .font(.system(size: 16, weight: .medium))
+        .foregroundColor(.white)
+        
         
       }
       HStack {  // 각 영화에 맞는 장르들이 나오도록
@@ -54,9 +59,9 @@ extension MovieListDetailPage.MovieCardComponent: View {
               .frame(width: 10, height: 10)
           }
         } // Forech
-        .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
+        .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 4))
         .background(
-          RoundedRectangle(cornerRadius: 15).stroke(Color(.gray), lineWidth: 1)
+          RoundedRectangle(cornerRadius: 16).fill(AppColor.Background.base)
         )
         Spacer()
       } // hstack
@@ -64,8 +69,8 @@ extension MovieListDetailPage.MovieCardComponent: View {
       .foregroundColor(Color(.label))
       .padding(.top, 12)
       .padding(.bottom, 12)
-      
     }
+    .padding(.top, 8)
   }
 }
 

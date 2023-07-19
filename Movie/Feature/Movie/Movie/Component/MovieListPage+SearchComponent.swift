@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import DesignSystem
 
 extension MovieListPage {
   struct SearchComponent {
@@ -38,7 +39,7 @@ extension MovieListPage.SearchComponent: View {
       if !viewState.text.isEmpty {
         Button(action: { textBinding.wrappedValue = "" }) {
           Text("Cancel")
-            .foregroundColor(.red)
+            .foregroundColor(AppColor.Tint.primary)
         }
       }
     }

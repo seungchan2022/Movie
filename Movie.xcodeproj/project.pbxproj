@@ -58,6 +58,17 @@
 		ECA995FB2A5FF653006C7F57 /* ReviewsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA995FA2A5FF653006C7F57 /* ReviewsStore.swift */; };
 		ECA995FD2A5FF6E8006C7F57 /* ReviewsEffector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA995FC2A5FF6E8006C7F57 /* ReviewsEffector.swift */; };
 		ECA995FF2A5FF702006C7F57 /* ReviewsRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA995FE2A5FF702006C7F57 /* ReviewsRouteBuilder.swift */; };
+		ECB249D62A67765600C9FCA7 /* DesignSystem.docc in Sources */ = {isa = PBXBuildFile; fileRef = ECB249D52A67765600C9FCA7 /* DesignSystem.docc */; };
+		ECB249E42A67765700C9FCA7 /* DesignSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = ECB249D42A67765600C9FCA7 /* DesignSystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ECB249E72A67765700C9FCA7 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB249D22A67765600C9FCA7 /* DesignSystem.framework */; };
+		ECB249E82A67765700C9FCA7 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ECB249D22A67765600C9FCA7 /* DesignSystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ECB249F42A6777EF00C9FCA7 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECB249F32A6777EF00C9FCA7 /* Asset.xcassets */; };
+		ECB249F62A67780600C9FCA7 /* FrameworkBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB249F52A67780600C9FCA7 /* FrameworkBundle.swift */; };
+		ECB249FB2A67790200C9FCA7 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB249FA2A67790200C9FCA7 /* AppColor.swift */; };
+		ECB24A002A679D3700C9FCA7 /* MovieListDetailPage+MovieOverviewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB249FF2A679D3700C9FCA7 /* MovieListDetailPage+MovieOverviewComponent.swift */; };
+		ECB24A022A67ACEC00C9FCA7 /* MovieListDetailPage+MovieKeywordsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB24A012A67ACEC00C9FCA7 /* MovieListDetailPage+MovieKeywordsComponent.swift */; };
+		ECB24A052A67B79F00C9FCA7 /* MyListsListPage+WishListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB24A042A67B79F00C9FCA7 /* MyListsListPage+WishListComponent.swift */; };
+		ECB24A072A67C4A800C9FCA7 /* MyListsListPage+SeenListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB24A062A67C4A800C9FCA7 /* MyListsListPage+SeenListComponent.swift */; };
 		ECCFD4CC2A66539A00DD7300 /* DirectorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCFD4CB2A66539A00DD7300 /* DirectorStore.swift */; };
 		ECD2C1342A5FCDDF00B49C99 /* MovieListDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD2C1332A5FCDDF00B49C99 /* MovieListDetailPage.swift */; };
 		ECD2C1362A5FD1C800B49C99 /* MovieListDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD2C1352A5FD1C800B49C99 /* MovieListDetailStore.swift */; };
@@ -66,6 +77,30 @@
 		ECFBDF9C2A63AB9B00D2E986 /* MovieListPage+MovieCardComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFBDF9B2A63AB9B00D2E986 /* MovieListPage+MovieCardComponent.swift */; };
 		ECFBDF9E2A63AEC300D2E986 /* MovieListPage+SearchComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFBDF9D2A63AEC300D2E986 /* MovieListPage+SearchComponent.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ECB249E52A67765700C9FCA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC7606BC2A5E7ADF00F732E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECB249D12A67765600C9FCA7;
+			remoteInfo = DesignSystem;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ECB249E92A67765700C9FCA7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ECB249E82A67765700C9FCA7 /* DesignSystem.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EC03C5622A62773D00F16A53 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
@@ -120,6 +155,16 @@
 		ECA995FA2A5FF653006C7F57 /* ReviewsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsStore.swift; sourceTree = "<group>"; };
 		ECA995FC2A5FF6E8006C7F57 /* ReviewsEffector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsEffector.swift; sourceTree = "<group>"; };
 		ECA995FE2A5FF702006C7F57 /* ReviewsRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsRouteBuilder.swift; sourceTree = "<group>"; };
+		ECB249D22A67765600C9FCA7 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECB249D42A67765600C9FCA7 /* DesignSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DesignSystem.h; sourceTree = "<group>"; };
+		ECB249D52A67765600C9FCA7 /* DesignSystem.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = DesignSystem.docc; sourceTree = "<group>"; };
+		ECB249F32A6777EF00C9FCA7 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
+		ECB249F52A67780600C9FCA7 /* FrameworkBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkBundle.swift; sourceTree = "<group>"; };
+		ECB249FA2A67790200C9FCA7 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		ECB249FF2A679D3700C9FCA7 /* MovieListDetailPage+MovieOverviewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieListDetailPage+MovieOverviewComponent.swift"; sourceTree = "<group>"; };
+		ECB24A012A67ACEC00C9FCA7 /* MovieListDetailPage+MovieKeywordsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieListDetailPage+MovieKeywordsComponent.swift"; sourceTree = "<group>"; };
+		ECB24A042A67B79F00C9FCA7 /* MyListsListPage+WishListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyListsListPage+WishListComponent.swift"; sourceTree = "<group>"; };
+		ECB24A062A67C4A800C9FCA7 /* MyListsListPage+SeenListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyListsListPage+SeenListComponent.swift"; sourceTree = "<group>"; };
 		ECCFD4CB2A66539A00DD7300 /* DirectorStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectorStore.swift; sourceTree = "<group>"; };
 		ECD2C1332A5FCDDF00B49C99 /* MovieListDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListDetailPage.swift; sourceTree = "<group>"; };
 		ECD2C1352A5FD1C800B49C99 /* MovieListDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListDetailStore.swift; sourceTree = "<group>"; };
@@ -131,6 +176,14 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		EC7606C12A5E7ADF00F732E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB249E72A67765700C9FCA7 /* DesignSystem.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECB249CF2A67765600C9FCA7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -164,6 +217,8 @@
 			children = (
 				EC6587C72A65671A00D6ECCA /* MovieListDetailPage+MovieCardComponent.swift */,
 				EC6587C92A65757100D6ECCA /* MovieListDetailPage+MovieReviewComponent.swift */,
+				ECB249FF2A679D3700C9FCA7 /* MovieListDetailPage+MovieOverviewComponent.swift */,
+				ECB24A012A67ACEC00C9FCA7 /* MovieListDetailPage+MovieKeywordsComponent.swift */,
 				EC6587CB2A657B0E00D6ECCA /* MovieListDetailPage+MovieCastComponent.swift */,
 				EC6587CF2A658F7800D6ECCA /* MovieListDetailPage+MovieDirectorComponent.swift */,
 			);
@@ -204,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				EC7606C62A5E7ADF00F732E9 /* Movie */,
+				ECB249D32A67765600C9FCA7 /* DesignSystem */,
 				EC7606C52A5E7ADF00F732E9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -212,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				EC7606C42A5E7ADF00F732E9 /* Movie.app */,
+				ECB249D22A67765600C9FCA7 /* DesignSystem.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -361,6 +418,75 @@
 			path = Reviews;
 			sourceTree = "<group>";
 		};
+		ECB249D32A67765600C9FCA7 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				ECB249F22A6777B300C9FCA7 /* Resource */,
+				ECB249F12A6777B000C9FCA7 /* Component */,
+				ECB249F02A6777AD00C9FCA7 /* Base */,
+				ECB249D42A67765600C9FCA7 /* DesignSystem.h */,
+				ECB249D52A67765600C9FCA7 /* DesignSystem.docc */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		ECB249F02A6777AD00C9FCA7 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				ECB249F92A67781F00C9FCA7 /* Image */,
+				ECB249F82A67781D00C9FCA7 /* Color */,
+				ECB249F72A67781A00C9FCA7 /* Font */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		ECB249F12A6777B000C9FCA7 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		ECB249F22A6777B300C9FCA7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				ECB249F32A6777EF00C9FCA7 /* Asset.xcassets */,
+				ECB249F52A67780600C9FCA7 /* FrameworkBundle.swift */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		ECB249F72A67781A00C9FCA7 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		ECB249F82A67781D00C9FCA7 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				ECB249FA2A67790200C9FCA7 /* AppColor.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		ECB249F92A67781F00C9FCA7 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		ECB24A032A67B6D600C9FCA7 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				ECB24A042A67B79F00C9FCA7 /* MyListsListPage+WishListComponent.swift */,
+				ECB24A062A67C4A800C9FCA7 /* MyListsListPage+SeenListComponent.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		ECD2C1322A5FCD0F00B49C99 /* MovieListDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +523,7 @@
 		ECFBDF9F2A63C3AD00D2E986 /* MyList */ = {
 			isa = PBXGroup;
 			children = (
+				ECB24A032A67B6D600C9FCA7 /* Component */,
 				ECA2CF322A5ECFDF006A9BEF /* MyListsListPage.swift */,
 				ECA2CF342A5ED036006A9BEF /* MyListsListStore.swift */,
 				ECA2CF362A5ED2F1006A9BEF /* MyListsListEffector.swift */,
@@ -407,6 +534,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		ECB249CD2A67765600C9FCA7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB249E42A67765700C9FCA7 /* DesignSystem.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		EC7606C32A5E7ADF00F732E9 /* Movie */ = {
 			isa = PBXNativeTarget;
@@ -415,15 +553,35 @@
 				EC7606C02A5E7ADF00F732E9 /* Sources */,
 				EC7606C12A5E7ADF00F732E9 /* Frameworks */,
 				EC7606C22A5E7ADF00F732E9 /* Resources */,
+				ECB249E92A67765700C9FCA7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				ECB249E62A67765700C9FCA7 /* PBXTargetDependency */,
 			);
 			name = Movie;
 			productName = Movie;
 			productReference = EC7606C42A5E7ADF00F732E9 /* Movie.app */;
 			productType = "com.apple.product-type.application";
+		};
+		ECB249D12A67765600C9FCA7 /* DesignSystem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECB249EE2A67765700C9FCA7 /* Build configuration list for PBXNativeTarget "DesignSystem" */;
+			buildPhases = (
+				ECB249CD2A67765600C9FCA7 /* Headers */,
+				ECB249CE2A67765600C9FCA7 /* Sources */,
+				ECB249CF2A67765600C9FCA7 /* Frameworks */,
+				ECB249D02A67765600C9FCA7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DesignSystem;
+			productName = DesignSystem;
+			productReference = ECB249D22A67765600C9FCA7 /* DesignSystem.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -438,6 +596,9 @@
 					EC7606C32A5E7ADF00F732E9 = {
 						CreatedOnToolsVersion = 14.3.1;
 						LastSwiftMigration = 1430;
+					};
+					ECB249D12A67765600C9FCA7 = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
@@ -455,6 +616,7 @@
 			projectRoot = "";
 			targets = (
 				EC7606C32A5E7ADF00F732E9 /* Movie */,
+				ECB249D12A67765600C9FCA7 /* DesignSystem */,
 			);
 		};
 /* End PBXProject section */
@@ -466,6 +628,14 @@
 			files = (
 				EC7606CF2A5E7AE200F732E9 /* Preview Assets.xcassets in Resources */,
 				EC7606CC2A5E7AE200F732E9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECB249D02A67765600C9FCA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB249F42A6777EF00C9FCA7 /* Asset.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +655,7 @@
 				EC73E7142A61108000801B49 /* DirectorPage.swift in Sources */,
 				EC32DBE92A62F0C8001A89CE /* Store.swift in Sources */,
 				ECA2CF372A5ED2F1006A9BEF /* MyListsListEffector.swift in Sources */,
+				ECB24A022A67ACEC00C9FCA7 /* MovieListDetailPage+MovieKeywordsComponent.swift in Sources */,
 				EC7607252A5E930900F732E9 /* DiscoverListEffector.swift in Sources */,
 				EC7607212A5E923B00F732E9 /* DiscoverListPage.swift in Sources */,
 				ECA2CF312A5ECD05006A9BEF /* FanClubListRouteBuilder.swift in Sources */,
@@ -493,9 +664,11 @@
 				EC73E7182A6110F200801B49 /* DirectorEffector.swift in Sources */,
 				ECA995FB2A5FF653006C7F57 /* ReviewsStore.swift in Sources */,
 				EC7606FA2A5E872900F732E9 /* RootNavigator.swift in Sources */,
+				ECB24A052A67B79F00C9FCA7 /* MyListsListPage+WishListComponent.swift in Sources */,
 				EC7607192A5E8F0400F732E9 /* MovieListStore.swift in Sources */,
 				EC7607132A5E8CF200F732E9 /* Link.swift in Sources */,
 				EC6831152A600FA100C4E7C8 /* CastListPage.swift in Sources */,
+				ECB24A002A679D3700C9FCA7 /* MovieListDetailPage+MovieOverviewComponent.swift in Sources */,
 				EC7607172A5E8ED400F732E9 /* MovieListPage.swift in Sources */,
 				EC03C5632A62773D00F16A53 /* ProfilePage.swift in Sources */,
 				EC7607042A5E88A800F732E9 /* AppDIContainer.swift in Sources */,
@@ -514,6 +687,7 @@
 				EC6831172A600FE500C4E7C8 /* CastListStore.swift in Sources */,
 				EC73E71D2A61241F00801B49 /* CustomListPage.swift in Sources */,
 				EC03C5672A6277D700F16A53 /* ProfileEffector.swift in Sources */,
+				ECB24A072A67C4A800C9FCA7 /* MyListsListPage+SeenListComponent.swift in Sources */,
 				EC68311B2A60131000C4E7C8 /* CastListRouteBuilder.swift in Sources */,
 				ECFBDF9C2A63AB9B00D2E986 /* MovieListPage+MovieCardComponent.swift in Sources */,
 				EC7607232A5E926F00F732E9 /* DiscoverListStore.swift in Sources */,
@@ -535,7 +709,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ECB249CE2A67765600C9FCA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB249F62A67780600C9FCA7 /* FrameworkBundle.swift in Sources */,
+				ECB249D62A67765600C9FCA7 /* DesignSystem.docc in Sources */,
+				ECB249FB2A67790200C9FCA7 /* AppColor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ECB249E62A67765700C9FCA7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECB249D12A67765600C9FCA7 /* DesignSystem */;
+			targetProxy = ECB249E52A67765700C9FCA7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		EC7606D02A5E7AE200F732E9 /* Debug */ = {
@@ -655,6 +847,7 @@
 		EC7606D32A5E7AE200F732E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -686,6 +879,7 @@
 		EC7606D42A5E7AE200F732E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -713,6 +907,72 @@
 			};
 			name = Release;
 		};
+		ECB249EA2A67765700C9FCA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = D22ZM93S77;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seungchan.DesignSystem;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		ECB249EB2A67765700C9FCA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = D22ZM93S77;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seungchan.DesignSystem;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -730,6 +990,15 @@
 			buildConfigurations = (
 				EC7606D32A5E7AE200F732E9 /* Debug */,
 				EC7606D42A5E7AE200F732E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECB249EE2A67765700C9FCA7 /* Build configuration list for PBXNativeTarget "DesignSystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECB249EA2A67765700C9FCA7 /* Debug */,
+				ECB249EB2A67765700C9FCA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

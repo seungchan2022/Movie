@@ -47,6 +47,7 @@ extension MovieListPage: View {
           }
         }
       }
+      .padding(.horizontal, 12)
     }
     .navigationTitle("Now Playing")
     .toolbar {

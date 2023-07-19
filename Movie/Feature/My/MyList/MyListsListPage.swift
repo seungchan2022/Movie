@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import DesignSystem
 
 struct MyListsListPage {
   @ObservedObject var viewStore: MyListsListStore
@@ -27,12 +28,12 @@ extension MyListsListPage: View {
               .font(.system(size: 18, weight: .medium))
               .frame(height: 30, alignment: .leading)
               .padding(.horizontal)
-              .foregroundColor(Color(.systemMint).opacity(0.5))
+              .foregroundColor(AppColor.Label.base3)
           }
         }
       }
       
-      Section(header: Text("List Type")) {
+      Section {
         HStack(spacing: 0) {
           Spacer()
           Button(action: { viewStore.send(.loadWishItemList) }) {
@@ -40,7 +41,6 @@ extension MyListsListPage: View {
           }
           .frame(width: 150, height: 30)
           .background(state.showType == .wishList ? Color.gray.opacity(0.7) : Color.gray.opacity(0.3))
-          .foregroundColor(.white)
           .cornerRadius(10)
           
           Button(action: { viewStore.send(.loadSeenItemList) }) {
@@ -48,101 +48,31 @@ extension MyListsListPage: View {
           }
           .frame(width: 150, height: 30)
           .background(state.showType == .seenList ? Color.gray.opacity(0.7) : Color.gray.opacity(0.3))
-          .foregroundColor(.white)
           .cornerRadius(10)
           Spacer()
         }
+        .font(.system(size: 14, weight: .medium))
         .buttonStyle(.plain)
-      }
+      } // wishlist, seenlist 버튼
       
       
-        if state.showType == .wishList {
-          Section(header: Text("\(state.wishItemList.count) MOVIES IN WISHLIST (BY RELEASE DATE)")) {
-            ForEach(state.wishItemList, id: \.title) { item in
-              HStack {
-                Image(uiImage: item.imageURL ?? UIImage())
-                  .resizable()
-                  .aspectRatio(contentMode: .fill)
-                  .frame(width: 100, height: 160)
-                  .clipShape(RoundedRectangle(cornerRadius: 10))
-                  .padding(.bottom, 8)
-                
-                VStack(alignment: .leading, spacing: 16) {
-                  Text(item.title)
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(.yellow)
-                  
-                  HStack {
-                    Image(systemName: "star.fill")
-                      .resizable()
-                      .aspectRatio(contentMode: .fit)
-                      .frame(width: 16, height: 16)
-                      .foregroundColor(Color(.systemRed))
-                    
-                    Text(String(format: "%.1f", item.rate))
-                    
-                    Text(item.date)
-                  }
-                  .font(.system(size: 16, weight: .medium))
-                  .foregroundColor(.gray)
-                  .lineLimit(1)
-                  .minimumScaleFactor(0.5)
-                  
-                  
-                  Text(item.summary)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.gray)
-                    .lineLimit(3)
-                }
-                Spacer()
-              }
-              .frame(height: 160)
-              .padding(.vertical, 8)
-            }
-          }
-        } else if state.showType == .seenList {
-          Section(header: Text("\(state.seenItemList.count) MOVIES IN SEENLIST (BY RELEASE DATE)")) {
-            ForEach(state.seenItemList, id: \.title) { item in
-              HStack {
-                Image(uiImage: item.imageURL ?? UIImage())
-                  .resizable()
-                  .aspectRatio(contentMode: .fill)
-                  .frame(width: 100, height: 160)
-                  .clipShape(RoundedRectangle(cornerRadius: 10))
-                  .padding(.bottom, 8)
-                
-                VStack(alignment: .leading, spacing: 16) {
-                  Text(item.title)
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(.yellow)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-                  HStack {
-                    Image(systemName: "star.fill")
-                      .resizable()
-                      .aspectRatio(contentMode: .fit)
-                      .frame(width: 16, height: 16)
-                      .foregroundColor(Color(.systemRed))
-                    
-                    Text(String(format: "%.1f", item.rate))
-                    
-                    Text(item.date)
-                  }
-                  .font(.system(size: 16, weight: .medium))
-                  .foregroundColor(.gray)
-                  
-                  Text(item.summary)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.gray)
-                    .lineLimit(3)
-                }
-                Spacer()
-              }
-              .frame(height: 160)
-              .padding(.vertical, 8)
-            }
+      if state.showType == .wishList {
+        Section(header: Text("\(state.wishItemList.count) MOVIES IN WISHLIST (BY RELEASE DATE)")) {
+          ForEach(state.wishItemList, id: \.title) { item in
+            WishListComponent(viewState: .init(item: item))
+            .frame(height: 160)
+            .padding(.vertical, 8)
           }
         }
+      } else if state.showType == .seenList {
+        Section(header: Text("\(state.seenItemList.count) MOVIES IN SEENLIST (BY RELEASE DATE)")) {
+          ForEach(state.seenItemList, id: \.title) { item in
+            SeenListComponent(viewState: .init(item: item))
+            .frame(height: 160)
+            .padding(.vertical, 8)
+          }
+        }
+      }
     }
     .listStyle(GroupedListStyle())
     .sheet(isPresented: isShowSheet) {

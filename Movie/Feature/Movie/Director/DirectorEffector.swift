@@ -16,15 +16,15 @@ extension DirectorEffector {
         .init(
           id: "The director ID of the fastx",
           movieItemId: "fastx",
-          name: "The director name of fastx"),
+          name: "The director information of fastx"),
         .init(
           id: "The director ID of the transformer",
           movieItemId: "transformer",
-          name: "The director name of transformer"),
+          name: "The director information of transformer"),
         .init(
           id: "The director ID of the spiderman",
           movieItemId: "spiderman",
-          name: "The director name of spidemran"),
+          name: "The director information of spidemran"),
       ]
     }
   }

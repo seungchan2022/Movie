@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import DesignSystem
 
 extension MovieListDetailPage {
   struct MovieReviewComponent {
@@ -11,7 +12,7 @@ extension MovieListDetailPage {
 extension MovieListDetailPage.MovieReviewComponent: View {
   var body: some View {
     Text(viewState.item.reviews)
-      .foregroundColor(Color(.systemMint))
+      .foregroundColor(AppColor.Label.base3)
       .onTapGesture {
         tapAction(viewState.item)
       }

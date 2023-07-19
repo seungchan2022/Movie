@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import DesignSystem
 
 extension MovieListDetailPage {
   struct MovieDirectorComponent {
@@ -15,7 +16,7 @@ extension MovieListDetailPage.MovieDirectorComponent: View {
         .font(.system(size: 16, weight: .bold))
       Text(viewState.item.director)
         .font(.system(size: 14, weight: .medium))
-        .foregroundColor(.gray)
+        .foregroundColor(AppColor.Label.base2)
       
       Spacer()
     }

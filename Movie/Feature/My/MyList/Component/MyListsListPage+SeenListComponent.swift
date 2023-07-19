@@ -2,29 +2,29 @@ import Foundation
 import SwiftUI
 import DesignSystem
 
-extension MovieListPage {
-  struct MovieCardComponent {
+extension MyListsListPage {
+  struct SeenListComponent {
     let viewState: ViewState
-    let tapAction: (MovieListStore.State.ScopeItem) -> Void
+//    let tapAction: (MyListsListStore.State.ScopeItem) -> Void
   }
 }
 
-extension MovieListPage.MovieCardComponent: View {
+extension MyListsListPage.SeenListComponent: View {
   var body: some View {
-    HStack(spacing: 16) {
+    HStack {
       Image(uiImage: viewState.item.imageURL ?? UIImage())
         .resizable()
         .aspectRatio(contentMode: .fill)
         .frame(width: 100, height: 160)
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.bottom, 8)
       
       VStack(alignment: .leading, spacing: 16) {
-        Spacer()
         Text(viewState.item.title)
           .font(.system(size: 18, weight: .medium))
           .foregroundColor(AppColor.Label.base)
         
-        HStack(spacing: 5) {
+        HStack {
           Image(systemName: "star.fill")
             .resizable()
             .aspectRatio(contentMode: .fit)
@@ -36,25 +36,24 @@ extension MovieListPage.MovieCardComponent: View {
           Text(viewState.item.date)
         }
         .font(.system(size: 16, weight: .medium))
+        .foregroundColor(AppColor.Label.base2)
+        .lineLimit(1)
+        .minimumScaleFactor(0.5)
+        
         
         Text(viewState.item.summary)
           .font(.system(size: 16, weight: .medium))
           .foregroundColor(AppColor.Label.base2)
-        
-        Spacer()
+          .lineLimit(3)
       }
-      
       Spacer()
-    }
-    .frame(height: 200)
-    .onTapGesture {
-      tapAction(viewState.item)
     }
   }
 }
 
-extension MovieListPage.MovieCardComponent {
+extension MyListsListPage.SeenListComponent {
   struct ViewState: Equatable {
-    let item: MovieListStore.State.ScopeItem
+    let item: MyListsListStore.State.ScopeItem
   }
 }
+

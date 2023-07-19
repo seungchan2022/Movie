@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import DesignSystem
 
 extension MovieListDetailPage {
   struct MovieCastComponent {
@@ -14,7 +15,7 @@ extension MovieListDetailPage.MovieCastComponent: View {
       Text("Cast")
         .font(.system(size: 16, weight: .bold))
       Text("See all")
-        .foregroundColor(Color(.systemMint))
+        .foregroundColor(AppColor.Label.base3)
       
       Spacer()
     }
