@@ -6,6 +6,8 @@ struct MovieListDetailPage {
   @ObservedObject var viewStore: MovieListDetailStore
   @State private var wishListSelected = false
   @State private var seenListSelected = false
+  @State private var isActionSheetShowing = false
+  
 }
 
 extension MovieListDetailPage {
@@ -21,11 +23,8 @@ extension MovieListDetailPage: View {
         Section {
           MovieCardComponent(
             viewState: .init(item: selectedItem))
-          
-//          .listRowBackground(Color(.systemBlue).opacity(0.2))
-//          .listRowBackground(LinearGradient(gradient: Gradient(colors: [.black, .gray, .black]), startPoint: .leading, endPoint: .trailing))
           .listRowBackground(RadialGradient(colors: [.gray, .black], center: .center, startRadius: 0, endRadius: 270))
-
+          
           
           VStack {  // wishlist, seenlist
             HStack {
@@ -49,6 +48,8 @@ extension MovieListDetailPage: View {
                       .foregroundColor(AppColor.Tint.primary)
                   }
                 }
+                .foregroundColor(.white)
+                
               }
               .frame(width: wishListSelected ? 120 : 100, height: 30, alignment: .center)
               .background(
@@ -80,6 +81,8 @@ extension MovieListDetailPage: View {
                       .foregroundColor(AppColor.Tint.secondary)
                   }
                 }
+                .foregroundColor(.white)
+                
               }
               .frame(width: seenListSelected ? 80 : 100, height: 30, alignment: .center)
               .background(
@@ -91,14 +94,39 @@ extension MovieListDetailPage: View {
                   )
               )
               
-              Button(action: {
-                
-              }) {
+              Button(action: { isActionSheetShowing = true }) {
                 HStack(spacing: 2) {
                   Image(systemName: "pin")
                   Text("List")
                 }
               }
+              .confirmationDialog(
+                "Add or remove \(state.itemList.first(where: { $0.id == state.movieItemID })?.title ?? "") from yout lists",
+                isPresented: $isActionSheetShowing,
+                titleVisibility: .visible)
+              {
+                Button(
+                  wishListSelected ? "Remove from wishlist" : "Add to wishlist",
+                  role: wishListSelected ? .destructive : .none,
+                  action: {
+                    wishListSelected.toggle()
+                    seenListSelected = false
+                  })
+                
+                Button(
+                  seenListSelected ? "Remove from seenList" : "Add to seenlist",
+                  role: seenListSelected ? .destructive : .none,
+                  action: {
+                    seenListSelected.toggle()
+                    wishListSelected = false
+                  })
+                
+                Button("Create list", role: .none, action: { print("Did tap create list")})
+                
+                
+                Button("Cancel", role: .cancel, action: { print("Cancel")})
+              }
+              
               .frame(width: 60, height: 30, alignment: .center)
               .foregroundColor(AppColor.Label.base)
               .background(
@@ -106,7 +134,7 @@ extension MovieListDetailPage: View {
                   .stroke(AppColor.Label.base, lineWidth: 1)
               )
               Spacer()
-            }
+            } // list 버튼들
             .buttonStyle(.plain)
           }
           .padding(.top, 10)
@@ -135,6 +163,41 @@ extension MovieListDetailPage: View {
       } // selectecItem
     }
     .navigationTitle(state.movieItemID)
+    
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button(action: { isActionSheetShowing = true}) {
+          Image(systemName: "text.badge.plus")
+        }
+      }
+    }
+    .confirmationDialog(
+      "Add or remove \(state.itemList.first(where: { $0.id == state.movieItemID })?.title ?? "") from yout lists",
+      isPresented: $isActionSheetShowing,
+      titleVisibility: .visible)
+    {
+      Button(
+        wishListSelected ? "Remove from wishlist" : "Add to wishlist",
+        role: wishListSelected ? .destructive : .none,
+        action: {
+          wishListSelected.toggle()
+          seenListSelected = false
+        })
+      
+      Button(
+        seenListSelected ? "Remove from seenList" : "Add to seenlist",
+        role: seenListSelected ? .destructive : .none,
+        action: {
+          seenListSelected.toggle()
+          wishListSelected = false
+        })
+      
+      Button("Create list", role: .none, action: { print("Did tap create list")})
+      
+      
+      Button("Cancel", role: .cancel, action: { print("Cancel")})
+    }
+    
     .onAppear {
       viewStore.send(.loadItemList)
     }

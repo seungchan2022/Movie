@@ -4,6 +4,7 @@ import DesignSystem
 
 struct MyListsListPage {
   @ObservedObject var viewStore: MyListsListStore
+  @State private var isActionSheetShowing = false
 }
 
 extension MyListsListPage {
@@ -38,6 +39,7 @@ extension MyListsListPage: View {
           Spacer()
           Button(action: { viewStore.send(.loadWishItemList) }) {
             Text("Wishlist")
+
           }
           .frame(width: 150, height: 30)
           .background(state.showType == .wishList ? Color.gray.opacity(0.7) : Color.gray.opacity(0.3))
@@ -78,14 +80,31 @@ extension MyListsListPage: View {
     .sheet(isPresented: isShowSheet) {
       CustomListsPage()
     }
+    .navigationBarTitleDisplayMode(.large)
     .navigationTitle("My Lists")
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
-        Button(action: { print("Setting")}) {
+        Button(action: { isActionSheetShowing = true }) {
           Image(systemName: "line.3.horizontal.decrease.circle")
         }
       }
     }
+    .confirmationDialog(
+      "Sort movies by",
+      isPresented: $isActionSheetShowing,
+      titleVisibility: .visible)
+    {
+      Button("Sort by added date", role: .none, action: { print("Did tap sort by added date") })
+      
+      Button("Sort by release date", role: .none, action: { print("Did tap sort by release date") })
+      
+      Button("Sort by ratings", role: .none, action: { print("Did tap sort by ratings") })
+      
+      Button("Sort by popularity", role: .none, action: { print("Did tap sort by popularity") })
+      
+      Button("Cancel", role: .cancel, action: { print("Cancel")})
+      }
+    
     .onAppear {
       viewStore.send(.loadWishItemList)
     }

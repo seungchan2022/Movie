@@ -10,6 +10,10 @@ extension AppMain: App {
   var body: some Scene {
     WindowGroup {
       AppTabBarContainer(navigatorList: appDelegate.tabNavigationList)
+      /// - Note:
+      ///   If you are using the ignoresSafeArea property to ignore the safe area on an internal screen,
+      ///   please add the corresponding code to the part where you first execute the LinkNavigator.
+        .ignoresSafeArea()
     }
   }
 }

@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 
 struct CustomListsPage {
   @State private var listName = ""
@@ -9,43 +10,19 @@ struct CustomListsPage {
 extension CustomListsPage: View {
   
   var body: some View {
-    ScrollView {
-      VStack(alignment: .leading, spacing: 10) {
-        Spacer()
-        Spacer()
-        
-        // List information
-        Text("LIST INFORMATION")
-          .font(.system(size: 16, weight: .light))
-          .foregroundColor(.gray)
-          .padding(.horizontal, 12)
-          .padding(.top, 12)
-        
-        HStack {
-          Text("Name:")
-            .font(.system(size: 18, weight: .bold))
-          
-          TextField("Name your list", text: $listName)
-            .font(.system(size: 18, weight: .medium))
-            .textFieldStyle(.plain)
+    List {
+      Section(header: Text("LIST INFORMATION")
+        .padding(.top, 24)) {
+          HStack {
+            Text("Name:")
+            TextField("Name your list", text: $listName)
+              .textFieldStyle(.plain)
+          }
+          .font(.system(size: 18, weight: .medium))
         }
-        .frame(width: 320 ,height: 50)
-        .padding(.horizontal, 16)
-        .background(
-          RoundedRectangle(cornerRadius: 8)
-            .stroke(.black, lineWidth: 1)
-            .background(
-              RoundedRectangle(cornerRadius: 8)
-                .fill(.gray.opacity(0.2))))
-        
-        // List cover
-        Text("LIST COVER")
-          .font(.system(size: 16, weight: .light))
-          .foregroundColor(.gray)
-          .padding(.horizontal, 12)
-          .padding(.top, 8)
-        
-        HStack {
+      
+      Section(header: Text("LIST COVER")) {
+        HStack(spacing: 16) {
           Image(systemName: "magnifyingglass")
             .renderingMode(.template)
             .resizable()
@@ -55,58 +32,29 @@ extension CustomListsPage: View {
           TextField("Search and add a movie", text: $searchMovie)
             .font(.system(size: 18, weight: .medium))
             .textFieldStyle(.plain)
-            .padding(EdgeInsets(top: 2, leading: 4, bottom: 2, trailing: 4))
+            .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
             .background(
               RoundedRectangle(cornerRadius: 5)
-                .stroke(Color(.systemGray), lineWidth: 1))
-        }
-        .frame(width: 320 ,height: 50)
-        .padding(.horizontal, 16)
-        .background(
-          RoundedRectangle(cornerRadius: 8)
-            .stroke(.black, lineWidth: 1)
-            .background(
-              RoundedRectangle(cornerRadius: 8)
-                .fill(.gray.opacity(0.2))))
-        .padding(.bottom, 20)
-        
-        // cover, cancel
-        VStack(alignment: .leading, spacing: .zero) {
-          // create
-          Text("Create")
-            .foregroundColor(Color(.systemBlue))
-            .font(.system(size: 20, weight: .medium))
-            .frame(width: 320 ,height: 50, alignment: .leading)
-            .padding(.horizontal, 16)
-            .background(
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(.black, lineWidth: 1)
-                .background(
-                  RoundedRectangle(cornerRadius: 8)
-                    .fill(.gray.opacity(0.2)))
-            )
-            .onTapGesture {
-              // create
-            }
-
-          // cancel
-          Text("Cancel")
-            .foregroundColor(Color(.systemRed))
-            .font(.system(size: 20, weight: .medium))
-            .frame(width: 320 ,height: 50, alignment: .leading)
-            .padding(.horizontal, 16)
-            .background(
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(.black, lineWidth: 1)
-                .background(
-                  RoundedRectangle(cornerRadius: 8)
-                    .fill(.gray.opacity(0.2)))
-            )
-            .onTapGesture {
-              dismiss()
-            }
+                .stroke(AppColor.Label.base2, lineWidth: 1))
         }
       }
+      
+      // cover, cancel
+      // create
+      Text("Create")
+        .foregroundColor(Color(.systemBlue))
+        .font(.system(size: 18, weight: .light))
+        .onTapGesture {
+          // create
+        }
+      
+      // cancel
+      Text("Cancel")
+        .foregroundColor(Color(.systemRed))
+        .font(.system(size: 18, weight: .light))
+        .onTapGesture {
+          dismiss()
+        }
     }
   }
 }

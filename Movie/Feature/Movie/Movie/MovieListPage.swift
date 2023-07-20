@@ -49,6 +49,7 @@ extension MovieListPage: View {
       }
       .padding(.horizontal, 12)
     }
+    .navigationBarTitleDisplayMode(.large)
     .navigationTitle("Now Playing")
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
