@@ -30,6 +30,11 @@ final class MovieListStore: ObservableObject, Store {
       case .loadItemList:
         newState.itemList = await effector.itemList()
         return newState
+        
+      case .onChangeSheet(let isShow):
+        print("DEBUG: ", isShow)
+        newState.isShowSheet = isShow
+        return newState
       }
     }
   }
@@ -39,12 +44,19 @@ extension MovieListStore {
   struct State: Equatable {
     var keyword = ""
     var itemList: [State.ScopeItem] = []
+    var isShowSheet: Bool
+    
+    init(isShowSheet: Bool = false) {
+      self.isShowSheet = isShowSheet
+    }
+    
   }
 
   enum Action: Equatable {
     case onChangeKeyword(String)
     case onSelectedDetailItem(MovieListStore.State.ScopeItem)
     case loadItemList
+    case onChangeSheet(Bool)
   }
 }
 

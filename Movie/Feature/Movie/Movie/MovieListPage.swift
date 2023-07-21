@@ -26,6 +26,12 @@ extension MovieListPage {
   private var searchComponentViewState: SearchComponent.ViewState {
     .init(text: state.keyword)
   }
+  
+  private var isShowSheet: Binding<Bool> {
+    .init(
+      get: { state.isShowSheet },
+      set: { viewStore.send(.onChangeSheet($0)) })
+  }
 }
 
 extension MovieListPage: View {
@@ -51,13 +57,18 @@ extension MovieListPage: View {
     }
     .navigationBarTitleDisplayMode(.large)
     .navigationTitle("Now Playing")
+    
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
-        Button(action: { print("Setting")}) {
-          Image(systemName:"wrench.adjustable")
+          Button(action: { viewStore.send(.onChangeSheet(true)) }) {
+            Image(systemName:"wrench.adjustable")
+          }
         }
-      }
     }
+    .sheet(isPresented: isShowSheet) {
+      SettingsPage()
+    }
+    
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: { isButtonClicked.toggle() }) {

@@ -11,6 +11,7 @@
 		EC03C5652A62777200F16A53 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C5642A62777200F16A53 /* ProfileStore.swift */; };
 		EC03C5672A6277D700F16A53 /* ProfileEffector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C5662A6277D700F16A53 /* ProfileEffector.swift */; };
 		EC03C5692A6277FC00F16A53 /* ProfileRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C5682A6277FC00F16A53 /* ProfileRouteBuilder.swift */; };
+		EC0854A42A6A3D6D00681349 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0854A32A6A3D6D00681349 /* SettingsPage.swift */; };
 		EC32DBE92A62F0C8001A89CE /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC32DBE82A62F0C8001A89CE /* Store.swift */; };
 		EC6587C82A65671A00D6ECCA /* MovieListDetailPage+MovieCardComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6587C72A65671A00D6ECCA /* MovieListDetailPage+MovieCardComponent.swift */; };
 		EC6587CA2A65757100D6ECCA /* MovieListDetailPage+MovieReviewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6587C92A65757100D6ECCA /* MovieListDetailPage+MovieReviewComponent.swift */; };
@@ -107,6 +108,7 @@
 		EC03C5642A62777200F16A53 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		EC03C5662A6277D700F16A53 /* ProfileEffector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEffector.swift; sourceTree = "<group>"; };
 		EC03C5682A6277FC00F16A53 /* ProfileRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteBuilder.swift; sourceTree = "<group>"; };
+		EC0854A32A6A3D6D00681349 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		EC32DBE82A62F0C8001A89CE /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		EC6587C72A65671A00D6ECCA /* MovieListDetailPage+MovieCardComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieListDetailPage+MovieCardComponent.swift"; sourceTree = "<group>"; };
 		EC6587C92A65757100D6ECCA /* MovieListDetailPage+MovieReviewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieListDetailPage+MovieReviewComponent.swift"; sourceTree = "<group>"; };
@@ -204,6 +206,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		EC0854A22A6A3D5F00681349 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EC0854A32A6A3D6D00681349 /* SettingsPage.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		EC32DBE72A62F0BE001A89CE /* MVI */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,12 +257,12 @@
 			path = Director;
 			sourceTree = "<group>";
 		};
-		EC73E71B2A61240A00801B49 /* MyListsDetail */ = {
+		EC73E71B2A61240A00801B49 /* CustomList */ = {
 			isa = PBXGroup;
 			children = (
 				EC73E71C2A61241F00801B49 /* CustomListPage.swift */,
 			);
-			path = MyListsDetail;
+			path = CustomList;
 			sourceTree = "<group>";
 		};
 		EC7606BB2A5E7ADF00F732E9 = {
@@ -366,6 +376,7 @@
 		EC7607152A5E8EBB00F732E9 /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				EC0854A22A6A3D5F00681349 /* Settings */,
 				ECFBDF992A639E8A00D2E986 /* Movie */,
 				ECD2C1322A5FCD0F00B49C99 /* MovieListDetail */,
 				EC73E7122A61106A00801B49 /* Director */,
@@ -402,7 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				ECFBDF9F2A63C3AD00D2E986 /* MyList */,
-				EC73E71B2A61240A00801B49 /* MyListsDetail */,
+				EC73E71B2A61240A00801B49 /* CustomList */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -690,6 +701,7 @@
 				ECB24A072A67C4A800C9FCA7 /* MyListsListPage+SeenListComponent.swift in Sources */,
 				EC68311B2A60131000C4E7C8 /* CastListRouteBuilder.swift in Sources */,
 				ECFBDF9C2A63AB9B00D2E986 /* MovieListPage+MovieCardComponent.swift in Sources */,
+				EC0854A42A6A3D6D00681349 /* SettingsPage.swift in Sources */,
 				EC7607232A5E926F00F732E9 /* DiscoverListStore.swift in Sources */,
 				ECA2CF332A5ECFDF006A9BEF /* MyListsListPage.swift in Sources */,
 				EC03C5652A62777200F16A53 /* ProfileStore.swift in Sources */,
