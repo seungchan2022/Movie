@@ -5,7 +5,7 @@ import DesignSystem
 extension MyListsListPage {
   struct WishListComponent {
     let viewState: ViewState
-//    let tapAction: (MyListsListStore.State.ScopeItem) -> Void
+    let tapAction: (MyListsListStore.State.ScopeItem) -> Void
   }
 }
 
@@ -47,6 +47,9 @@ extension MyListsListPage.WishListComponent: View {
           .lineLimit(3)
       }
       Spacer()
+    }
+    .onTapGesture {
+      tapAction(viewState.item)
     }
   }
 }

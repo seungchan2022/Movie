@@ -22,7 +22,7 @@ final class MyListsListStore: ObservableObject, Store {
       case .loadItemList:
         newState.itemList = await effector.itemList()
         return newState
-                
+        
       case .onChangeSheet(let isShow):
         print("DEBUG: ", isShow)
         newState.isShowSheet = isShow
@@ -32,7 +32,7 @@ final class MyListsListStore: ObservableObject, Store {
         newState.wishItemList = await effector.wishItemList()
         newState.showType = .wishList
         return newState
-
+        
       case .loadSeenItemList:
         newState.seenItemList = await effector.seenItemList()
         newState.showType = .seenList
@@ -40,15 +40,13 @@ final class MyListsListStore: ObservableObject, Store {
         
       case .onChangeShowType(let type):
         print("type", type)
-          newState.showType = type
+        newState.showType = type
+//        newState.lastSelectedListType = type
         return newState
         
-//      case .onShowMovieDetail:
-//        effector.routeToMovieDetail()
-//        return newState
-              case .onSelectDetailItem(let item):
-                effector.routeToMovieDetailPage(item)
-                return newState
+      case .onSelectDetailItem(let item):
+        effector.routeToMovieDetailPage(item)
+        return newState
       }
     }
   }
@@ -61,7 +59,8 @@ extension MyListsListStore {
     var seenItemList: [State.ScopeItem] = []
     var isShowSheet: Bool
     var showType: ShowType = .wishList
-    
+//    var lastSelectedListType: ShowType?
+
     init(isShowSheet: Bool = false) {
       self.isShowSheet = isShowSheet
     }
@@ -75,8 +74,7 @@ extension MyListsListStore {
     case loadSeenItemList
     case onChangeSheet(Bool)
     case onChangeShowType(MyListsListStore.State.ShowType)
-//    case onShowMovieDetail
-        case onSelectDetailItem(MovieListStore.State.ScopeItem)
+    case onSelectDetailItem(MyListsListStore.State.ScopeItem)
   }
 }
 

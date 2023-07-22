@@ -39,7 +39,7 @@ extension MyListsListPage: View {
           Spacer()
           Button(action: { viewStore.send(.loadWishItemList) }) {
             Text("Wishlist")
-
+            
           }
           .frame(width: 150, height: 30)
           .background(state.showType == .wishList ? Color.gray.opacity(0.7) : Color.gray.opacity(0.3))
@@ -61,7 +61,9 @@ extension MyListsListPage: View {
       if state.showType == .wishList {
         Section(header: Text("\(state.wishItemList.count) MOVIES IN WISHLIST (BY RELEASE DATE)")) {
           ForEach(state.wishItemList, id: \.title) { item in
-            WishListComponent(viewState: .init(item: item))
+            WishListComponent(
+              viewState: .init(item: item),
+              tapAction: {  viewStore.send(.onSelectDetailItem($0))})
             .frame(height: 160)
             .padding(.vertical, 8)
           }
@@ -69,7 +71,9 @@ extension MyListsListPage: View {
       } else if state.showType == .seenList {
         Section(header: Text("\(state.seenItemList.count) MOVIES IN SEENLIST (BY RELEASE DATE)")) {
           ForEach(state.seenItemList, id: \.title) { item in
-            SeenListComponent(viewState: .init(item: item))
+            SeenListComponent(
+              viewState: .init(item: item),
+              tapAction: {  viewStore.send(.onSelectDetailItem($0)) })
             .frame(height: 160)
             .padding(.vertical, 8)
           }
@@ -103,8 +107,7 @@ extension MyListsListPage: View {
       Button("Sort by popularity", role: .none, action: { print("Did tap sort by popularity") })
       
       Button("Cancel", role: .cancel, action: { print("Cancel")})
-      }
-    
+    }
     .onAppear {
       viewStore.send(.loadWishItemList)
     }

@@ -29,7 +29,7 @@ extension CustomListsPage: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 20, height: 20)
           
-          TextField("Search and add a movie", text: $searchMovie)
+          TextField("Search and add a movie as your cover", text: $searchMovie)
             .font(.system(size: 18, weight: .medium))
             .textFieldStyle(.plain)
             .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
