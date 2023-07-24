@@ -8,14 +8,15 @@ struct MyListsListEffector {
 
 extension MyListsListEffector {
   // 디테일 페이지 => 만들었던것 재사용
-    var routeToMovieDetailPage: (MyListsListStore.State.ScopeItem) -> Void {
+  @MainActor
+    var routeToMovieDetailPage: (MyListsListStore.State.ScopeItem) async -> Void {
       { item in
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
           navigator.push(
             featureName: Link.movieListDetail.rawValue,
             items: ["movieItemID": item.id],
             isAnimation: true)
-        }
+//        }
       }
     }
   

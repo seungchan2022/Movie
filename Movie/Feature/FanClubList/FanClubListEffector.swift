@@ -8,7 +8,8 @@ struct FanClubListEffector {
 
 extension FanClubListEffector {
   // 프로필 디테일 페이지
-  var routeToProfile: () -> Void {
+  @MainActor
+  var routeToProfile: () async -> Void {
     {
       navigator.push(
         featureName: Link.profile.rawValue,

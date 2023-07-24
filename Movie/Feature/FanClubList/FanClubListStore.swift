@@ -25,7 +25,7 @@ final class FanClubListStore: ObservableObject, Store {
         return newState
         
       case .onTapProfile:
-        effector.routeToProfile()
+        await effector.routeToProfile()
         return newState
       }
     }

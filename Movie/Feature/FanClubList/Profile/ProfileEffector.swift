@@ -7,6 +7,8 @@ struct ProfileEffector {
 }
 
 extension ProfileEffector {
+  
+  @MainActor
   var routeToMovieDetail: () -> Void {
     {
       navigator.push(

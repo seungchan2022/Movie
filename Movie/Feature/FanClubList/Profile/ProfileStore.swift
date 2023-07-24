@@ -28,14 +28,12 @@ final class ProfileStore: ObservableObject, Store {
         return newState
         
       case .onShowMovieDetail:
-        effector.routeToMovieDetail()
+        await effector.routeToMovieDetail()
         return newState
       }
-      
     }
   }
 }
-
 
 extension ProfileStore {
   struct State: Equatable {

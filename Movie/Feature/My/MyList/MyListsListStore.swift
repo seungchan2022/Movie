@@ -45,7 +45,7 @@ final class MyListsListStore: ObservableObject, Store {
         return newState
         
       case .onSelectDetailItem(let item):
-        effector.routeToMovieDetailPage(item)
+        await effector.routeToMovieDetailPage(item)
         return newState
       }
     }

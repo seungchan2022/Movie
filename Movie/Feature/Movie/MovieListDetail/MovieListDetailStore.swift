@@ -20,15 +20,15 @@ final class MovieListDetailStore: ObservableObject, Store {
       
       switch action {
       case .onTapReviews(let item):
-        effector.routeToReviews(item)
+        await effector.routeToReviews(item)
         return newState
                 
       case .onTapCastList(let item):
-        effector.routeToCastList(item)
+        await effector.routeToCastList(item)
         return newState
         
       case .onTapDirector(let item):
-        effector.routeToDirector(item)
+        await effector.routeToDirector(item)
         return newState
         
       case .loadItemList:

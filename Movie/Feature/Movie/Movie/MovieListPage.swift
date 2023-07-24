@@ -45,11 +45,18 @@ extension MovieListPage: View {
           textChangeAction: { viewStore.send(.onChangeKeyword($0)) })
         .padding(.horizontal, 8)
         
-        VStack {
+        LazyVStack {
           ForEach(filteredItems, id: \.title) { item in
             MovieCardComponent(
               viewState: .init(item: item),
               tapAction: { viewStore.send(.onSelectedDetailItem($0)) })
+            // 무한 로딩 페이지
+            .onAppear {
+              guard let lasPick = filteredItems.last else { return }
+              guard lasPick.id == item.id else { return }
+              print("AA")
+              viewStore.send(.loadItemList)
+            }
           }
         }
       }
@@ -76,8 +83,31 @@ extension MovieListPage: View {
         }
       }
     }
+    .setLoading(state.isLoading)
     .onAppear {
       viewStore.send(.loadItemList)
+    }
+  }
+}
+
+extension View {
+  @ViewBuilder
+  func setLoading(_ isLoading: Bool) -> some View {
+    ZStack {
+      self
+      if isLoading {
+        VStack {
+          Spacer()
+          ProgressView()
+          Text("로딩중 입니다...")
+            .frame(maxWidth: .infinity)
+          Spacer()
+        }
+        // 로딩중에 화면을 건드리지 못하게 하기 위해 백그라운드 설정
+        .background(
+          Color(.systemBlue).opacity(0.7)
+        )
+      }
     }
   }
 }

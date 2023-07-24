@@ -17,7 +17,6 @@ extension FanClubListPage: View {
     VStack {
       List {
         Section {
-          
           ForEach(state.itemList, id: \.name) { profile in
             HStack(spacing: 10) {
               Image(uiImage: profile.profileImageURL ?? UIImage())
@@ -37,14 +36,12 @@ extension FanClubListPage: View {
                 
                 Spacer()
               }
-              
             }
             .frame(height: 120)
             .onTapGesture {
               viewStore.send(.onTapProfile)
             }
           }
-          
         } header: {
           Text("POPULAR PEOPLE TO ADD TO YOUR FAN CLUB")
             .font(.system(size: 18, weight: .bold))

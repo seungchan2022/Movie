@@ -8,36 +8,39 @@ struct MovieListDetailEffector {
 }
 
 extension MovieListDetailEffector {
+  @MainActor
   var routeToReviews: (MovieListDetailStore.State.ScopeItem) -> Void {
     { item in
-      DispatchQueue.main.async {
+//      DispatchQueue.main.async {
         navigator.push(
           featureName: Link.reviews.rawValue,
           items: ["movieItemID": item.id],
           isAnimation: true)
-      }
+//      }
     }
   }
   
+  @MainActor
   var routeToCastList: (MovieListDetailStore.State.ScopeItem) -> Void {
     { item in
-      DispatchQueue.main.async {
+//      DispatchQueue.main.async {
         navigator.push(
           featureName: Link.castList.rawValue,
           items: ["movieItemID": item.id],
           isAnimation: true)
-      }
+//      }
     }
   }
   
+  @MainActor
   var routeToDirector: (MovieListDetailStore.State.ScopeItem) -> Void {
     { item in
-      DispatchQueue.main.async {
+//      DispatchQueue.main.async {
         navigator.push(
           featureName: Link.director.rawValue,
           items: ["movieItemID": item.id],
           isAnimation: true)
-      }
+//      }
     }
   }
   
