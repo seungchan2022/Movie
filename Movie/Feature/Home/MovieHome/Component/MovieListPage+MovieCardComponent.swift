@@ -12,9 +12,14 @@ extension MovieListPage {
 extension MovieListPage.MovieCardComponent: View {
   var body: some View {
     HStack(spacing: 16) {
-      Image(uiImage: viewState.item.imageURL ?? UIImage())
-        .resizable()
-        .aspectRatio(contentMode: .fill)
+      RemoteImage(url: viewState.item.imageURL)
+//      AsyncImage(
+//        url: URL(string: viewState.item.imageURL),
+//        content: { $0.resizable()
+//        }, placeholder: {
+//          Rectangle()
+//            .fill(Color.gray)
+//        })
         .frame(width: 100, height: 160)
         .clipShape(RoundedRectangle(cornerRadius: 10))
       

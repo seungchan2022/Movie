@@ -9,24 +9,46 @@ extension MovieListDetailPage {
   }
 }
 
+extension MovieListDetailPage.MovieCardComponent {
+  // release_date 문자열에서 년도를 추출하는 함수
+  
+  private func extractYear(from dateString: String) -> String? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    if let date = dateFormatter.date(from: dateString) {
+      let calendar = Calendar.current
+      let year = calendar.component(.year, from: date)
+      return "\(year)"
+    }
+    return nil
+  }
+}
+
 extension MovieListDetailPage.MovieCardComponent: View {
   var body: some View {
     VStack {
       HStack {
-        Image(uiImage: viewState.item.imageURL ?? UIImage())
-          .resizable()
-          .aspectRatio(contentMode: .fill)
+        RemoteImage(url: viewState.item.imageURL)
           .frame(width: 120, height: 160)
           .clipShape(RoundedRectangle(cornerRadius: 10))
         
         VStack(alignment: .leading) {
           Spacer()
           
-          Group {
-            Text("\(viewState.item.year) • ") +
-            Text("\(viewState.item.runningTime) minutes • ") +
-            Text(viewState.item.release)
+          HStack {
+            let dateString = viewState.item.releaseDate
+            if let year = extractYear(from: dateString) {
+              Text(year + " • ") +
+              Text("\(viewState.item.runningTime) minut.. • ") +
+              Text(viewState.item.status)
+            }
           }
+          .lineLimit(0)
+          .minimumScaleFactor(0.5)
+
+          Text(viewState.item.country[0])
+            .lineLimit(0)
+            .minimumScaleFactor(0.5)
           
           Spacer()
           
@@ -36,8 +58,8 @@ extension MovieListDetailPage.MovieCardComponent: View {
               .aspectRatio(contentMode: .fit)
               .frame(width: 16, height: 16)
               .foregroundColor(AppColor.Tint.primary)
-            Text(String(format: "%.1f", viewState.item.rate))
-            Text("\(viewState.item.comments) ratings")
+            Text(String(format: "%.1f", viewState.item.voteAverage))
+            Text("\(viewState.item.voteCount) ratings")
             
             Spacer()
           }

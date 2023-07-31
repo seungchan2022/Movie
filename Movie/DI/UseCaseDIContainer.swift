@@ -4,12 +4,15 @@ import Platform
 struct UseCaseDIContainer {
   
   let movieAPI: MovieAPI
+  let movieDetailAPI: MovieDetailAPI
   
   init() {
     let playListActor = MoviePlayListActor()
-    self.movieAPI = MovieAPI(
-      getListTask: { try await playListActor.getList(pageNumber: $0)
-      })
+    let detailActor = MovieDetailActor()
+    self.movieAPI = MovieAPI(getListTask: { try await playListActor.getList(pageNumber: $0)
+    })
+    self.movieDetailAPI = MovieDetailAPI(getDetailTask: { try await detailActor.getMovie(id: $0)
+    })
   }
 }
 

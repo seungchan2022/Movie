@@ -11,12 +11,10 @@ extension MyListsListEffector {
   @MainActor
     var routeToMovieDetailPage: (MyListsListStore.State.ScopeItem) async -> Void {
       { item in
-//        DispatchQueue.main.async {
           navigator.push(
             featureName: Link.movieListDetail.rawValue,
             items: ["movieItemID": item.id],
             isAnimation: true)
-//        }
       }
     }
   

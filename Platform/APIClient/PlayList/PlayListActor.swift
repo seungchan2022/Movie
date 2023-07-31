@@ -28,7 +28,6 @@ extension MovieAPIModel.PlayList.Request {
       "region": region,
       "page": "\(page)"
     ].map { .init(name: $0.key, value: $0.value) }
-    
     return base?.url
   }
 }

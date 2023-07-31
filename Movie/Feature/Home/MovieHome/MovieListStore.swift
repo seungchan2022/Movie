@@ -25,6 +25,7 @@ final class MovieListStore: ObservableObject, Store {
 
       case .onSelectedDetailItem(let item):
         await effector.routeToMovieDetailPage(item)
+        newState.selectedItemID = item.id
         return newState
         
       case .onChangeLoading(let isLoading):
@@ -33,23 +34,23 @@ final class MovieListStore: ObservableObject, Store {
         
       case .loadItemList:
         Task {
-          print("loadItemList BBB")
+//          print("loadItemList BBB")
           await self.send(effector.itemList(state.currentPage + 1))
         }
         
-        print("loadItemList AAA")
+//        print("loadItemList AAA")
         newState.isLoading = true
         return newState
         
       case .fetchItemList(let itemList):
-        print("fetchItemList CCC")
+//        print("fetchItemList CCC")
         newState.itemList = newState.itemList + itemList
         newState.currentPage = state.currentPage + 1
         newState.isLoading = false
         return newState
         
       case .onChangeSheet(let isShow):
-        print("DEBUG: ", isShow)
+//        print("DEBUG: ", isShow)
         newState.isShowSheet = isShow
         return newState
       }
@@ -65,6 +66,7 @@ extension MovieListStore {
     var currentPage: Int = .zero
     var isLoading: Bool = false // loading indicator 만들기 위한 작업
     
+    var selectedItemID: Int? // 옵셔널로 선언하여 선택된 항목이 없을 때 nil로 설정
     init(isShowSheet: Bool = false) {
       self.isShowSheet = isShowSheet
     }
@@ -83,7 +85,7 @@ extension MovieListStore {
 extension MovieListStore.State {
   struct ScopeItem: Equatable, Identifiable {
     let id: Int
-    let imageURL: UIImage?
+    let imageURL: String
     let title: String
     let date: String
     let rate: Double

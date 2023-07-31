@@ -22,7 +22,7 @@ final class MovieListDetailStore: ObservableObject, Store {
       case .onTapReviews(let item):
         await effector.routeToReviews(item)
         return newState
-                
+        
       case .onTapCastList(let item):
         await effector.routeToCastList(item)
         return newState
@@ -31,8 +31,27 @@ final class MovieListDetailStore: ObservableObject, Store {
         await effector.routeToDirector(item)
         return newState
         
+      case .onChangeLoading(let isLoading):
+        newState.isLoading = isLoading
+        return newState
+
+        
       case .loadItemList:
-        newState.itemList = await effector.itemList()
+//        newState.itemList = await effector.itemList()
+        Task {
+          print("loadItemList bbb")
+          await self.send(effector.itemList(state.movieItemID))
+//          await self.send(.fetchItemList(state.itemList))
+        }
+        print("loadItemList aaa")
+        newState.isLoading = true
+        return newState
+      
+      case .fetchItemList(let itemList):
+        print("fetchImteList ccc")
+//        newState.itemList = newState.itemList + itemList
+        newState.itemList = itemList
+        newState.isLoading = false
         return newState
       }
     }
@@ -43,28 +62,31 @@ extension MovieListDetailStore {
   struct State: Equatable {
     let movieItemID: String
     var itemList: [State.ScopeItem] = []
+    var isLoading: Bool = false
   }
-  
   
   enum Action: Equatable {
     case onTapReviews(MovieListDetailStore.State.ScopeItem)
-
     case onTapCastList(MovieListDetailStore.State.ScopeItem)
     case onTapDirector(MovieListDetailStore.State.ScopeItem)
     case loadItemList
+    case fetchItemList([State.ScopeItem])
+    case onChangeLoading(Bool)
   }
 }
 
 extension MovieListDetailStore.State {
   struct ScopeItem: Equatable, Identifiable {
-    let id: String
+    let id: Int
     let title: String
-    let imageURL: UIImage?
-    let year: Int
+//    let imageURL: UIImage?
+    let imageURL: String
+    let releaseDate: String
     let runningTime: Int
-    let release: String
-    let rate: Double
-    let comments: Int
+    let status: String
+    let country: [String]
+    let voteAverage: Double
+    let voteCount: Int
     let geners: [String]
     let reviews: String
     let overview: String

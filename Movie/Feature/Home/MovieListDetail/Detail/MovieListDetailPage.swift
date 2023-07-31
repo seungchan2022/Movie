@@ -19,12 +19,14 @@ extension MovieListDetailPage {
 extension MovieListDetailPage: View {
   var body: some View {
     List{
-      if let selectedItem = state.itemList.first(where: { $0.id == state.movieItemID }) {
+      if let selectedItem = state.itemList.first(where: { "\($0.id)" == state.movieItemID }) {
         Section {
           MovieCardComponent(
             viewState: .init(item: selectedItem))
           .listRowBackground(RadialGradient(colors: [.gray, .black], center: .center, startRadius: 0, endRadius: 270))
-          
+          .onAppear {
+            viewStore.send(.loadItemList)
+          }
           
           VStack {  // wishlist, seenlist
             HStack {
@@ -101,7 +103,7 @@ extension MovieListDetailPage: View {
                 }
               }
               .confirmationDialog(
-                "Add or remove \(state.itemList.first(where: { $0.id == state.movieItemID })?.title ?? "") from yout lists",
+                "Add or remove \(state.itemList.first(where: { "\($0.id)" ==  state.movieItemID })?.title ?? "") from yout lists",
                 isPresented: $isActionSheetShowing,
                 titleVisibility: .visible)
               {
@@ -163,7 +165,6 @@ extension MovieListDetailPage: View {
       } // selectecItem
     }
     .navigationTitle(state.movieItemID)
-    
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: { isActionSheetShowing = true}) {
@@ -172,7 +173,7 @@ extension MovieListDetailPage: View {
       }
     }
     .confirmationDialog(
-      "Add or remove \(state.itemList.first(where: { $0.id == state.movieItemID })?.title ?? "") from yout lists",
+      "Add or remove \(state.itemList.first(where: { "\($0.id)" == state.movieItemID })?.title ?? "") from yout lists",
       isPresented: $isActionSheetShowing,
       titleVisibility: .visible)
     {
@@ -197,7 +198,7 @@ extension MovieListDetailPage: View {
       
       Button("Cancel", role: .cancel, action: { print("Cancel")})
     }
-    
+    .setLoading(state.isLoading)
     .onAppear {
       viewStore.send(.loadItemList)
     }

@@ -19,6 +19,8 @@ extension Remote {
   // fetch: url을 통해 데이터를 불러오는 것
   func fetch(url: URL?) async throws -> Data {
     guard let url else { throw RemoteError.invalidURL } // 잘못된 URL
+
+    print("Fetch! url", url.absoluteString)
     
 //    let (data, response) = try await session.data(from: url)
 //

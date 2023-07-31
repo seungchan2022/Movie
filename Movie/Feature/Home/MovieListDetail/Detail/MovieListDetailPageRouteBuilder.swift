@@ -1,5 +1,7 @@
 import Foundation
+import Platform
 import SwiftUI
+
 
 struct MovieListDetailPageRouteBuilder: FeatureBuildType {
   var featureName: String {
@@ -8,6 +10,8 @@ struct MovieListDetailPageRouteBuilder: FeatureBuildType {
   
   func build(items: [String : String], diContainer: DIContainerType, navigator: NavigatorType) -> UIViewController {
     
+    guard let container = diContainer as? UseCaseDIContainer else { return .init() }
+        
     return UIHostingController(
       rootView: MovieListDetailPage(
         viewStore: .init(
@@ -15,7 +19,7 @@ struct MovieListDetailPageRouteBuilder: FeatureBuildType {
             movieItemID: items.getValue(key: "movieItemID")),
           effector: .init(
             navigator: navigator,
-            diContainer: diContainer))))
+            diContainer: container))))
   }
 }
 
