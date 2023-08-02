@@ -52,7 +52,7 @@ extension MovieAPIModel.PlayList.Response.Item {
       imageURL: posterPath?.imagePath ?? "",
       title: title,
       date: releaseDate,
-      rate: voteAverage,
+      rate: voteAverage * 10,
       summary: overView)
   }
 }

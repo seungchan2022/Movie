@@ -2,16 +2,28 @@ import Foundation
 import SwiftUI
 import DesignSystem
 
+
 extension MovieListDetailPage {
   struct MovieCardComponent {
     let viewState: ViewState
-//    let tapAction: (MovieListDetailStore.State.ScopeItem) -> Void
+    //    let tapAction: (MovieListDetailStore.State.ScopeItem) -> Void
+  }
+}
+
+extension MovieListDetailPage.MovieCardComponent {
+  private var lineColor: Color {
+    if viewState.item.voteAverage >= 75 {
+      return .green
+    } else if viewState.item.voteAverage >= 50 {
+      return .yellow
+    } else {
+      return .red
+    }
   }
 }
 
 extension MovieListDetailPage.MovieCardComponent {
   // release_date 문자열에서 년도를 추출하는 함수
-  
   private func extractYear(from dateString: String) -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -45,20 +57,35 @@ extension MovieListDetailPage.MovieCardComponent: View {
           }
           .lineLimit(0)
           .minimumScaleFactor(0.5)
-
-          Text(viewState.item.country[0])
-            .lineLimit(0)
-            .minimumScaleFactor(0.5)
+          
+          if !viewState.item.country.isEmpty {
+            Text(viewState.item.country[0])
+              .lineLimit(0)
+              .minimumScaleFactor(0.5)
+          } else {
+            Text("")
+          }
           
           Spacer()
           
-          HStack(spacing: 5) {
-            Image(systemName: "star.fill")
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 16, height: 16)
-              .foregroundColor(AppColor.Tint.primary)
-            Text(String(format: "%.1f", viewState.item.voteAverage))
+          HStack(spacing: 10) {
+            ZStack {
+              Circle()
+                .trim(from: 0, to: CGFloat(viewState.item.voteAverage / 100))
+                .stroke(
+                  lineColor,
+                  style: StrokeStyle(
+                    lineWidth: 2,
+                    lineCap: .round,
+                    dash: [1, 3]))
+                .rotationEffect(Angle(degrees: -90))
+              
+              Text("\(viewState.item.voteAverage, specifier: "%.0f")%")
+                .font(.system(size: 12, weight: .medium))
+                
+            }
+            .frame(width: 40, height: 40)
+            
             Text("\(viewState.item.voteCount) ratings")
             
             Spacer()
@@ -70,23 +97,27 @@ extension MovieListDetailPage.MovieCardComponent: View {
         
         
       }
-      HStack {  // 각 영화에 맞는 장르들이 나오도록
-        ForEach(0..<viewState.item.geners.count) { index in
-          Button(action: { print(viewState.item.geners[index]) }) {
-            Text(viewState.item.geners[index])
-              .font(.system(size: 14, weight: .bold))
-            Image(systemName: "chevron.right")
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 10, height: 10)
-          }
-        } // Forech
-        .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 4))
-        .background(
-          RoundedRectangle(cornerRadius: 16).fill(AppColor.Background.base)
-        )
-        Spacer()
-      } // hstack
+  // 각 영화에 맞는 장르들이 나오도록
+        ScrollView(.horizontal, showsIndicators: false) {
+          LazyHStack {
+            ForEach(viewState.item.geners.indices, id: \.self) { index in
+            Button(action: { print(viewState.item.geners[index]) }) {
+              Text(viewState.item.geners[index])
+                .font(.system(size: 14, weight: .bold))
+              Image(systemName: "chevron.right")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 10, height: 10)
+            }
+          } // Forech
+          .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 4))
+          .background(
+            RoundedRectangle(cornerRadius: 16).fill(AppColor.Background.base)
+          )
+            
+          Spacer()
+        }
+      }
       .buttonStyle(.plain)
       .foregroundColor(Color(.label))
       .padding(.top, 12)

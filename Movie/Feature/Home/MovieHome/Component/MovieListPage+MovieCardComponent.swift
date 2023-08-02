@@ -2,11 +2,38 @@ import Foundation
 import SwiftUI
 import DesignSystem
 
+
 extension MovieListPage {
   struct MovieCardComponent {
     let viewState: ViewState
     let tapAction: (MovieListStore.State.ScopeItem) -> Void
   }
+}
+
+extension MovieListPage.MovieCardComponent {
+  private func formatDate(_ dateString: String) -> String {
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = "yyyy-MM-dd"
+
+        let outputDateFormatter = DateFormatter()
+        outputDateFormatter.dateFormat = "M/d/yy"
+
+        if let date = inputDateFormatter.date(from: dateString) {
+            return outputDateFormatter.string(from: date)
+        } else {
+            return ""
+        }
+    }
+  
+  private var lineColor: Color {
+    if viewState.item.rate >= 75 {
+              return .green
+          } else if viewState.item.rate >= 50 {
+              return .yellow
+          } else {
+              return .red
+          }
+      }
 }
 
 extension MovieListPage.MovieCardComponent: View {
@@ -29,16 +56,25 @@ extension MovieListPage.MovieCardComponent: View {
           .font(.system(size: 18, weight: .medium))
           .foregroundColor(AppColor.Label.base)
         
-        HStack(spacing: 5) {
-          Image(systemName: "star.fill")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 16, height: 16)
-            .foregroundColor(AppColor.Tint.primary)
-          
-          Text(String(format: "%.1f", viewState.item.rate))
-          
-          Text(viewState.item.date)
+        HStack(spacing: 10) {
+          ZStack {
+            Circle()
+              .trim(from: 0, to: CGFloat(viewState.item.rate / 100))
+              .stroke(
+                lineColor,
+                style: StrokeStyle(
+                  lineWidth: 2,
+                  lineCap: .round,
+                  dash: [1, 2]))
+              .rotationEffect(Angle(degrees: -90))
+            
+            Text("\(viewState.item.rate, specifier: "%.0f")%")
+              .font(.system(size: 12, weight: .medium))
+              
+          }
+          .frame(width: 40, height: 40)
+
+          Text(formatDate(viewState.item.date))
         }
         .font(.system(size: 16, weight: .medium))
         

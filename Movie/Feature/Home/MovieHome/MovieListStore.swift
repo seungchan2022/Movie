@@ -37,7 +37,6 @@ final class MovieListStore: ObservableObject, Store {
 //          print("loadItemList BBB")
           await self.send(effector.itemList(state.currentPage + 1))
         }
-        
 //        print("loadItemList AAA")
         newState.isLoading = true
         return newState

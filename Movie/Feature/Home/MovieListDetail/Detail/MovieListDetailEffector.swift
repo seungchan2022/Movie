@@ -39,11 +39,12 @@ extension MovieListDetailEffector {
     }
   }
   
+  @MainActor
   var itemList: (String) async -> MovieListDetailStore.Action {
     {
       do {
         let result = try await diContainer.movieDetailAPI.getDetailTask($0)
-        return .fetchItemList([result.serialiazed])
+        return .fetchItemList([result.serialized])
       } catch {
         print("AA Error ", error)
         return .fetchItemList([])
@@ -53,7 +54,7 @@ extension MovieListDetailEffector {
 }
 
 extension MovieAPIModel.Detail.Movie.Response {
-  fileprivate var serialiazed:
+  fileprivate var serialized:
     MovieListDetailStore.State.ScopeItem {
       .init(
         id: id,
@@ -63,14 +64,16 @@ extension MovieAPIModel.Detail.Movie.Response {
         runningTime: runtime, // 시간
         status: "Released",
 //          status: status,
-//        country: ["United of America"],
         country: productionCountries.map(\.name),
-        voteAverage: voteAverage,
+        voteAverage: voteAverage * 10,
         voteCount: voteCount,
         geners: genres.map(\.name),
-        reviews: "",
+        reviews: "reviews",
         overview: overView,
-        keywords: [],
+//        keywords: keywords.map(\.name),
+//        keywords: keywords,
+        keywords: ["ketwro", "dfdf"],
+//        keywords: [],
         director: "")
   }
 }

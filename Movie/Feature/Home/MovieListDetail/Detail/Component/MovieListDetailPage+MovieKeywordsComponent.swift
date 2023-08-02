@@ -18,7 +18,9 @@ extension MovieListDetailPage.MovieKeywordsComponent: View {
         .font(.system(size: 16, weight: .bold))
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack(spacing: 12) {
-          ForEach(0..<viewState.item.keywords.count) { index in
+          
+          
+          ForEach(viewState.item.keywords.indices, id: \.self) { index in
             Button(action: {
               print(viewState.item.keywords[index])
             }) {
@@ -28,7 +30,7 @@ extension MovieListDetailPage.MovieKeywordsComponent: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 10, height: 10)
-              
+
             }
           }
           .foregroundColor(Color(.label))

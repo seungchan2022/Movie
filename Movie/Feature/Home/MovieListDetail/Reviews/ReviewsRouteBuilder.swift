@@ -6,8 +6,10 @@ struct ReviewsRouteBuilder: FeatureBuildType {
     Link.reviews.rawValue
   }
   
-  func build(items: [String : String], diContainer: DIContainerType, navigator: NavigatorType) -> UIViewController {
+  @MainActor func build(items: [String : String], diContainer: DIContainerType, navigator: NavigatorType) -> UIViewController {
    
+    guard let container = diContainer as? UseCaseDIContainer else { return .init() }
+    
     return UIHostingController(
       rootView: ReviewsPage(
         viewStore: .init(
@@ -15,7 +17,7 @@ struct ReviewsRouteBuilder: FeatureBuildType {
             movieItemID: items.getValue(key: "movieItemID")),
           effector: .init(
             navigator: navigator,
-            diContainer: diContainer))))
+            diContainer: container))))
   }
 }
 

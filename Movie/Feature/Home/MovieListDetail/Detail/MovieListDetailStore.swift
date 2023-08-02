@@ -34,22 +34,21 @@ final class MovieListDetailStore: ObservableObject, Store {
       case .onChangeLoading(let isLoading):
         newState.isLoading = isLoading
         return newState
-
-        
+                
       case .loadItemList:
-//        newState.itemList = await effector.itemList()
+        //        newState.itemList = await effector.itemList()
         Task {
           print("loadItemList bbb")
           await self.send(effector.itemList(state.movieItemID))
-//          await self.send(.fetchItemList(state.itemList))
+          //          await self.send(.fetchItemList(state.itemList))
         }
         print("loadItemList aaa")
         newState.isLoading = true
         return newState
-      
+        
       case .fetchItemList(let itemList):
         print("fetchImteList ccc")
-//        newState.itemList = newState.itemList + itemList
+        //        newState.itemList = newState.itemList + itemList
         newState.itemList = itemList
         newState.isLoading = false
         return newState
@@ -63,6 +62,7 @@ extension MovieListDetailStore {
     let movieItemID: String
     var itemList: [State.ScopeItem] = []
     var isLoading: Bool = false
+    var selectedItemID: Int?
   }
   
   enum Action: Equatable {
@@ -79,7 +79,7 @@ extension MovieListDetailStore.State {
   struct ScopeItem: Equatable, Identifiable {
     let id: Int
     let title: String
-//    let imageURL: UIImage?
+    //    let imageURL: UIImage?
     let imageURL: String
     let releaseDate: String
     let runningTime: Int

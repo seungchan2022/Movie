@@ -20,7 +20,14 @@ final class CastListStore: ObservableObject, Store {
       
       switch action {
       case .loadItemList:
-        newState.itemList = await effector.itemList()
+        Task {
+          await self.send(effector.itemList(state.movieItemID))
+        }
+//        newState.itemList = await effector.itemList()
+        return newState
+        
+      case . fetchItemList(let itemList):
+        newState.itemList = itemList
         return newState
       }
     }
@@ -31,20 +38,23 @@ extension CastListStore {
   struct State: Equatable {
     let movieItemID: String
     var itemList: [State.ScopeItem] = []
+    
   }
   
   enum Action: Equatable {
     case loadItemList
+    case fetchItemList([State.ScopeItem])
   }
 }
 
 extension CastListStore.State {
   struct ScopeItem: Equatable, Identifiable {
-    let id: String
-    let movieItemId: String 
-    let profileImage: UIImage?
-    let name: String
-    let character: String
+    let id: Int  // movieid
+    let cast: [String]  // 이안에 cast에 대한 데이터
+//    let movieItemId: String 
+//    let profileImage: UIImage?
+//    let name: String
+//    let character: String
   }
 }
 

@@ -148,9 +148,12 @@ extension MovieListDetailPage: View {
           //            .onTapGesture {
           //              //              viewStore.send(.onTapReviews($0))
           //            }
-          MovieReviewComponent(
-            viewState: .init(item: selectedItem),
-            tapAction: { viewStore.send(.onTapReviews($0)) })
+          
+            
+            MovieReviewComponent(
+              viewState: .init(item: selectedItem),
+              tapAction: { viewStore.send(.onTapReviews($0)) })
+          
           
           MovieOverviewComponent(viewState: .init(item: selectedItem))
         } // overview까지

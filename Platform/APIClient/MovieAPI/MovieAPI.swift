@@ -20,3 +20,21 @@ public struct MovieDetailAPI {
     self.getDetailTask = getDetailTask
   }
 }
+
+public struct ReviewAPI {
+  public var getReviewTask: @Sendable (String) async throws -> MovieAPIModel.Detail.Review.Response
+  
+  public init(
+    getReviewTask: @Sendable @escaping (String) async throws -> MovieAPIModel.Detail.Review.Response) {
+    self.getReviewTask = getReviewTask
+  }
+}
+
+public struct CreditAPI {
+  public var getCreidtTask: @Sendable (String) async throws -> MovieAPIModel.Detail.Credit.Response
+  
+  public init(
+    getCreidtTask: @Sendable @escaping (String) async throws -> MovieAPIModel.Detail.Credit.Response) {
+    self.getCreidtTask = getCreidtTask
+  }
+}

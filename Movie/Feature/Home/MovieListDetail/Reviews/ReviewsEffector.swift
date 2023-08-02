@@ -1,27 +1,44 @@
 import Foundation
 import UIKit
+import Platform
 
 struct ReviewsEffector {
   let navigator: NavigatorType
-  let diContainer: DIContainerType
+  let diContainer: UseCaseDIContainer
 }
 
 extension ReviewsEffector {
-  var itemList: () async -> [ReviewsStore.State.ScopeItem] {
+  
+  @MainActor
+  var itemList: (String) async -> ReviewsStore.Action {
     {
-      let _ = try? await Task.sleep(for: .zero)
-      
-      return [
-        .init(
-          id: "fastx",
-          reviews: "Reviews of fast x"),
-        .init(
-          id: "transformer",
-          reviews: "Reviews of transformer"),
-        .init(
-          id: "spiderman",
-          reviews: "Reviews of spiderman"),
-      ]
+      do {
+        let result = try await diContainer.reviewAPI.getReviewTask($0)
+//        let list = result.itemList.map(\.serialized)
+//        return .fetchItemList(list)
+        return .fetchItemList([result.serialized])
+      } catch {
+        print("Review Error ", error)
+        return .fetchItemList([])
+      }
     }
+  }
+}
+
+//extension MovieAPIModel.Detail.Review.Response.Item {
+//  fileprivate var serialized: ReviewsStore.State.ScopeItem {
+//    .init(
+//      id: id,
+//      author: author,
+//      content: content
+//      )
+//  }
+//}
+
+extension MovieAPIModel.Detail.Review.Response {
+  fileprivate var serialized: ReviewsStore.State.ScopeItem {
+    .init(
+      id: id,
+      page: page)
   }
 }

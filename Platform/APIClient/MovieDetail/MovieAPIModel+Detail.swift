@@ -3,28 +3,30 @@ import Foundation
 extension MovieAPIModel {
   public enum Detail {
     public enum Movie: Equatable {}
+    public enum Review: Equatable {}
+    public enum Credit: Equatable {}
 //    public enum Video: Equatable {}
 //    public enum SimialrMovie: Equatable {}
-//    public enum Review: Equatable {}
 //    public enum RecommendMovie: Equatable {}
 //    public enum Credential: Equatable {}
   }
 }
 
+// MARK: Movie
 extension MovieAPIModel.Detail.Movie {
   public struct Request: Equatable {
     public let apiKey: String
     public let movieID: String
     public let language: String
     public let includeImageLanguage: String
-    public let appendToResponse: [String]
+    public let appendToResponse: String
     
     public init(
       apiKey: String,
       movieID: String,
       language: String,
       includeImageLanguage: String = "en",
-      appendToResponse: [String] = ["keyword", "images"])
+      appendToResponse: String = "keywords, images")
     {
       self.apiKey = apiKey
       self.movieID = movieID
@@ -47,6 +49,7 @@ extension MovieAPIModel.Detail.Movie {
     public let title: String
     public let voteAverage: Double
     public let voteCount: Int
+//    public let keywords: [Keywords]
 
     private enum CodingKeys: String, CodingKey {
     
@@ -61,6 +64,7 @@ extension MovieAPIModel.Detail.Movie {
       case title = "title"
       case voteAverage = "vote_average"
       case voteCount = "vote_count"
+//      case keywords = "keywords"
     }
   }
 
@@ -82,7 +86,117 @@ extension MovieAPIModel.Detail.Movie {
       case name = "name"
     }
   }
+  
+  public struct Keywords: Equatable, Decodable, Identifiable {
+    public let id: Int  // 각 키워드 id
+    public let name: String
+
+    private enum CodingKeys: String, CodingKey {
+      case id, name
+    }
+  }
 }
+
+// MARK: Review
+extension MovieAPIModel.Detail.Review {
+  public struct Request: Equatable {
+    public let apiKey: String
+    public let movieID: String
+    public let language: String
+    
+    public init(
+      apiKey: String,
+      movieID: String,
+      language: String)
+    {
+      self.apiKey = apiKey
+      self.movieID = movieID
+      self.language = language
+    }
+  }
+
+  public struct Response: Equatable, Decodable {
+    public let id: Int  // movieId
+    public let page: Int
+//    public let itemList: [Item]
+    public let totalPages: Int
+    public let totalResults: Int
+    
+    private enum CodingKeys: String, CodingKey {
+      case id = "id"
+      case page = "page"
+//      case itemList = "results"
+      case totalPages = "total_pages"
+      case totalResults = "total_results"
+    }
+    
+    public struct Item: Equatable, Decodable, Identifiable {
+      public let id: String // 각 reviewid
+      public let author: String
+      public let content: String
+      
+      private enum CodingKeys: String, CodingKey {
+        case id, author, content
+      }
+    }
+  }
+}
+
+// MARK: Credit
+extension MovieAPIModel.Detail.Credit {
+  public struct Request: Equatable {
+    public let apiKey: String
+    public let movieID: String
+    public let language: String
+    
+    public init(
+      apiKey: String,
+      movieID: String,
+      language: String)
+    {
+      self.apiKey = apiKey
+      self.movieID = movieID
+      self.language = language
+    }
+  }
+
+  public struct Response: Equatable, Decodable {
+    public let id: Int  // movieId
+    public let cast: [Cast]
+//    public let crew: []
+    
+    private enum CodingKeys: String, CodingKey {
+      case id, cast
+    }
+    
+    public struct Cast: Equatable, Decodable, Identifiable {
+      public let id: Int  // cast id
+      public let name: String
+      public let department: String
+      public let profilePath: String
+      
+      private enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case department = "known_for_department"
+        case profilePath = "profile_path"
+      }
+    }
+  }
+}
+
+
+//
+//extension MovieAPIModel.Detail.RecommendMovie {
+//  public struct Request: Equatable {
+//
+//  }
+//
+//  public struct Response: Equatable, Decodable {
+//
+//  }
+//}
+
 //
 //extension MovieAPIModel.Detail.Video {
 //  public struct Request: Equatable {
@@ -104,32 +218,4 @@ extension MovieAPIModel.Detail.Movie {
 //  }
 //}
 //
-//extension MovieAPIModel.Detail.Review {
-//  public struct Request: Equatable {
 //
-//  }
-//
-//  public struct Response: Equatable, Decodable {
-//
-//  }
-//}
-//
-//extension MovieAPIModel.Detail.RecommendMovie {
-//  public struct Request: Equatable {
-//
-//  }
-//
-//  public struct Response: Equatable, Decodable {
-//
-//  }
-//}
-//
-//extension MovieAPIModel.Detail.Credential {
-//  public struct Request: Equatable {
-//
-//  }
-//
-//  public struct Response: Equatable, Decodable {
-//
-//  }
-//}

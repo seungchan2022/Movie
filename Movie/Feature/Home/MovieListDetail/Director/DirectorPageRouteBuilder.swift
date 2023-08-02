@@ -7,8 +7,6 @@ struct DirectorPageRouteBuilder: FeatureBuildType {
   }
   
   func build(items: [String : String], diContainer: DIContainerType, navigator: NavigatorType) -> UIViewController {
-  
-//    return UIHostingController(rootView: DirectorPage(viewStore: <#T##DirectorStore#>))
     
     return UIHostingController(
       rootView: DirectorPage(

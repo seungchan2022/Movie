@@ -14,27 +14,48 @@ extension CastListPage {
 extension CastListPage: View {
   var body: some View {
     List {
-      ForEach(state.itemList) { item in
-        if item.movieItemId == state.movieItemID {
-          HStack {
-            Image(uiImage: item.profileImage ?? UIImage())
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: 60, height: 80)
-              .cornerRadius(10)
-            VStack(alignment: .leading, spacing: 8) {
-              Spacer()
-              Text(item.name)
-                .font(.system(size: 16, weight: .bold))
-              Text(item.id)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.gray)
-              Spacer()
-            }
+      if let selectedItem = state.itemList.first(where: { "\($0.id)" == state.movieItemID }) {
+        HStack {
+//          Image(uiImage: selectedItem.profileImage ?? UIImage())
+//            .resizable()
+//            .aspectRatio(contentMode: .fill)
+//            .frame(width: 60, height: 80)
+//            .cornerRadius(10)
+          VStack(alignment: .leading, spacing: 8) {
+            Spacer()
+            Text(selectedItem.cast[0])
+              .font(.system(size: 16, weight: .bold))
+            Text("\(selectedItem.id)")
+              .font(.system(size: 14, weight: .medium))
+              .foregroundColor(.gray)
+            Spacer()
           }
         }
       }
     }
+    
+//    List {
+//      ForEach(state.itemList) { item in
+//        if item.movieItemId == state.movieItemID {
+//          HStack {
+//            Image(uiImage: item.profileImage ?? UIImage())
+//              .resizable()
+//              .aspectRatio(contentMode: .fill)
+//              .frame(width: 60, height: 80)
+//              .cornerRadius(10)
+//            VStack(alignment: .leading, spacing: 8) {
+//              Spacer()
+//              Text(item.name)
+//                .font(.system(size: 16, weight: .bold))
+//              Text(item.id)
+//                .font(.system(size: 14, weight: .medium))
+//                .foregroundColor(.gray)
+//              Spacer()
+//            }
+//          }
+//        }
+//      }
+//    }
     .onAppear {
       viewStore.send(.loadItemList)
     }
