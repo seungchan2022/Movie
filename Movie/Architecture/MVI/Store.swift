@@ -18,4 +18,13 @@ extension Store {
       state = await reduce(state, action, effector)
     }
   }
+
+  @MainActor
+  func send(_ actions: [Action]) {
+    Task {
+      for action in actions {
+        state = await reduce(state, action, effector)
+      }
+    }
+  }
 }

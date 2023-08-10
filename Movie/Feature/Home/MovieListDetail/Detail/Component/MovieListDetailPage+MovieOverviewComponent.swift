@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import DesignSystem
+import Platform
 
 extension MovieListDetailPage {
   struct MovieOverviewComponent {
@@ -9,31 +10,43 @@ extension MovieListDetailPage {
   }
 }
 
+extension MovieListDetailPage.MovieOverviewComponent {
+  private var overView: String? {
+    viewState.movie?.overView
+  }
+  
+  private var toggleText: String {
+    isOverView ? "Read More" : "Less"
+  }
+}
+
 extension MovieListDetailPage.MovieOverviewComponent: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {
-      Text("Overview:")
-        .font(.system(size: 16, weight: .bold))
-      if isOverView {
-        Text(viewState.item.overview)
-        Text("Less")
-          .foregroundColor(AppColor.Label.base3)
-      } else {
-        Text(viewState.item.overview)
-          .lineLimit(2)
-        Text("Read More")
-          .foregroundColor(AppColor.Label.base3)
+      if let overView {
+        Text("Overview:")
+          .font(.system(size: 16, weight: .bold))
+        
+        Button(action: { isOverView.toggle() }) {
+          VStack(alignment: .leading, spacing: 8) {
+            Text(overView)
+              .foregroundColor(AppColor.Label.base2)
+              .multilineTextAlignment(.leading)
+              .lineLimit(isOverView ? .max : 2)
+            Text(toggleText)
+              .foregroundColor(AppColor.Label.base3)
+              .padding(.bottom, 8)
+          }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
       }
-    }
-    .onTapGesture {
-      isOverView.toggle()
     }
   }
 }
 
 extension MovieListDetailPage.MovieOverviewComponent {
   struct ViewState: Equatable {
-    let item: MovieListDetailStore.State.ScopeItem
-    
+    let movie: MovieAPIModel.Detail.Movie.Response?
   }
 }
+

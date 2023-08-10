@@ -22,8 +22,8 @@ final class ProfileStore: ObservableObject, Store {
       switch action {
         
       case .loadItemList:
-        //        newState.itemList = await effector.itemList()
-        //        effector.getItemList { [weak self] itemList in
+        newState.itemList = await effector.itemList()
+//                effector.getItemList { [weak self] itemList in
         //          self?.state.itemList = itemList
         return newState
         
@@ -48,7 +48,12 @@ extension ProfileStore {
 
 extension ProfileStore.State {
   struct ScopeItem: Equatable {
+    let name: String
     let image: UIImage?
+//    let work: [String]
+//    let biography: String
+//    let birth: String
     let title: String
+//    let workImageList
   }
 }

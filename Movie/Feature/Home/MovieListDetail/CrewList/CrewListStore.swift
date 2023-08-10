@@ -2,20 +2,20 @@ import Foundation
 import UIKit
 import Platform
 
-final class CastListStore: ObservableObject, Store {
+final class CrewListStore: ObservableObject, Store {
   
   @Published var state: State
-  let effector: CastListEffector
+  let effector: CrewListEffector
   
   init(
     initialState state: State,
-    effector: CastListEffector)
+    effector: CrewListEffector)
   {
     self.state = state
     self.effector = effector
   }
   
-  var reduce: (State, Action, CastListEffector) async -> State {
+  var reduce: (State, Action, CrewListEffector) async -> State {
     { state, action, effector in
       var newState = state
       
@@ -27,19 +27,16 @@ final class CastListStore: ObservableObject, Store {
       case .loadItem:
         newState.isLoading = true
         Task {
-          print("load cast list page bbb")
-          await self.send(effector.cast(state.movieItemID))
+          await self.send(effector.crew(state.movieItemID))
         }
-        print("load cast list page aaa")
         return newState
         
-      case .fetchCast(let result):
-        print("fetch cast list page ccc")
-        newState.fetchCastData.isLoading = false
+      case .fetchCrew(let result):
+        newState.fetchCrewData.isLoading = false
         
         switch result {
         case .success(let item):
-          newState.fetchCastData.value = item
+          newState.fetchCrewData.value = item
           return newState
           
         case .failure(let error):
@@ -57,31 +54,32 @@ final class CastListStore: ObservableObject, Store {
   }
 }
 
-extension CastListStore {
+extension CrewListStore {
   struct State: Equatable {
     let movieItemID: String
     var isLoading: Bool = false
     
-    var fetchCastData: FetchData<MovieAPIModel.Detail.Credit.Response?> = .init(value: .none)
+    var fetchCrewData: FetchData<MovieAPIModel.Detail.Credit.Response?> = .init(value: .none)
   }
   
   enum Action: Equatable {
     case loadItem
     
-    case fetchCast(Result<MovieAPIModel.Detail.Credit.Response, CompositeError>)
+    case fetchCrew(Result<MovieAPIModel.Detail.Credit.Response, CompositeError>)
     
     case onChangeLoading(Bool)
     case throwError(CompositeError)
   }
 }
 
-//extension CastListStore.State {
+//extension CrewListStore.State {
 //  struct ScopeItem: Equatable, Identifiable {
-//    let id: Int  // cast id
+//    let id: Int  // crew id
 ////    let movieID: Int  // 넘겨지는 movie id
-//    let name: String  // 배우 이름
-//    let character: String // 배역 이름
+//    let name: String  // 크루 이름
+//    let department: String // 부서
 //    let profileImage: String
 //  }
 //}
+//
 

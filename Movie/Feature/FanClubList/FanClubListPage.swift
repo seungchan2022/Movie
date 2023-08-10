@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import DesignSystem
 
 struct FanClubListPage {
   @ObservedObject var viewStore: FanClubListStore
@@ -14,44 +15,57 @@ extension FanClubListPage {
 
 extension FanClubListPage: View {
   var body: some View {
-    VStack {
-      List {
-        Section {
-          ForEach(state.itemList, id: \.name) { profile in
-            HStack(spacing: 10) {
-              Image(uiImage: profile.profileImageURL ?? UIImage())
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 120)
-                .cornerRadius(10)
-              
-              VStack(alignment: .leading, spacing: 8) {
-                Spacer()
-                
-                Text(profile.name)
-                  .font(.system(size: 18, weight: .bold))
-                Text(profile.work)
-                  .font(.system(size: 14, weight: .medium))
-                  .foregroundColor(.gray)
-                
-                Spacer()
+    ScrollView {
+      VStack {
+        Text("POPULAR PEOPLE TO ADD TO YOUR FAN CLUB")
+          .font(.system(size: 14, weight: .medium))
+          .foregroundColor(AppColor.Label.base2)
+        LazyVStack {
+          ForEach(state.itemList, id: \.name) { item in
+            VStack {
+              Button(action: { print(item.name)
+                viewStore.send(.onTapProfile)
+              }) {
+                //              Divider()
+                HStack {
+                  Image(uiImage: item.profileImageURL ?? UIImage())
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 80, height: 100)
+                    .cornerRadius(10)
+                  
+                  VStack(alignment: .leading, spacing: 12) {
+                    
+                    Text(item.name)
+                      .font(.system(size: 18, weight: .bold))
+                      .foregroundColor(AppColor.Label.base)
+                    Text(item.work)
+                      .font(.system(size: 14, weight: .medium))
+                      .multilineTextAlignment(.leading)
+                      .foregroundColor(AppColor.Label.base2)
+                  }
+                  Spacer()
+                  
+                  Image(systemName: "chevron.right")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 15, height: 15)
+                    .foregroundColor(AppColor.Label.base2)
+                }
+                .padding(12)
               }
+              .foregroundColor(Color(.label))
             }
-            .frame(height: 120)
-            .onTapGesture {
-              viewStore.send(.onTapProfile)
-            }
+            Divider()
           }
-        } header: {
-          Text("POPULAR PEOPLE TO ADD TO YOUR FAN CLUB")
-            .font(.system(size: 18, weight: .bold))
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            .background(Color.gray.opacity(0.3))
         }
+        .background(
+          RoundedRectangle(cornerRadius: 10)
+            .fill(AppColor.Background.base)
+        )
+        .padding(.horizontal, 16)
       }
-      .listStyle(.plain)
+      .background(AppColor.Background.base2)
     }
     .navigationTitle("Fan Club")
     .onAppear {

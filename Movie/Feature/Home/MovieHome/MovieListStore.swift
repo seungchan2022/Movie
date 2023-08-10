@@ -25,6 +25,7 @@ final class MovieListStore: ObservableObject, Store {
 
       case .onSelectedDetailItem(let item):
         await effector.routeToMovieDetailPage(item)
+        // 선택한 아이템의 아이디가 movieID가 되도록?
         newState.selectedItemID = item.id
         return newState
         
@@ -35,6 +36,7 @@ final class MovieListStore: ObservableObject, Store {
       case .loadItemList:
         Task {
 //          print("loadItemList BBB")
+          // 해당 하는 page에 대한 데이터가 나오도록
           await self.send(effector.itemList(state.currentPage + 1))
         }
 //        print("loadItemList AAA")
@@ -83,7 +85,7 @@ extension MovieListStore {
 
 extension MovieListStore.State {
   struct ScopeItem: Equatable, Identifiable {
-    let id: Int
+    let id: Int // 각 아이템의 해당하는 movie id
     let imageURL: String
     let title: String
     let date: String
@@ -91,4 +93,5 @@ extension MovieListStore.State {
     let summary: String
   }
 }
+
 

@@ -17,8 +17,8 @@ public struct MovieDetailAPI {
   
   public init(
     getDetailTask: @Sendable @escaping (String) async throws -> MovieAPIModel.Detail.Movie.Response) {
-    self.getDetailTask = getDetailTask
-  }
+      self.getDetailTask = getDetailTask
+    }
 }
 
 public struct ReviewAPI {
@@ -26,15 +26,38 @@ public struct ReviewAPI {
   
   public init(
     getReviewTask: @Sendable @escaping (String) async throws -> MovieAPIModel.Detail.Review.Response) {
-    self.getReviewTask = getReviewTask
+      self.getReviewTask = getReviewTask
+    }
+}
+
+// CreditAPI안에 Cast와 Crew정보가 같이 있음
+public struct CreditAPI {
+  public var getCastTask: @Sendable (String) async throws -> MovieAPIModel.Detail.Credit.Response
+  public var getCrewTask: @Sendable (String) async throws -> MovieAPIModel.Detail.Credit.Response
+  
+  public init(
+    getCastTask: @Sendable @escaping (String) async throws -> MovieAPIModel.Detail.Credit.Response,
+    getCrewTask: @Sendable @escaping (String) async throws -> MovieAPIModel.Detail.Credit.Response)
+  {
+    self.getCastTask = getCastTask
+    self.getCrewTask = getCrewTask
   }
 }
 
-public struct CreditAPI {
-  public var getCreidtTask: @Sendable (String) async throws -> MovieAPIModel.Detail.Credit.Response
+public struct SimilarAPI {
+  public var getSimilarTask: @Sendable (String) async throws -> MovieAPIModel.Detail.Similar.Response
   
   public init(
-    getCreidtTask: @Sendable @escaping (String) async throws -> MovieAPIModel.Detail.Credit.Response) {
-    self.getCreidtTask = getCreidtTask
+    getSimilarTask: @Sendable @escaping (String) async throws -> MovieAPIModel.Detail.Similar.Response) {
+    self.getSimilarTask = getSimilarTask
+  }
+}
+
+public struct RecommendAPI {
+  public var getRecommendTask: @Sendable (String) async throws -> MovieAPIModel.Detail.Recommend.Response
+  
+  public init(
+    getRecommendTask: @Sendable @escaping (String) async throws -> MovieAPIModel.Detail.Recommend.Response) {
+    self.getRecommendTask = getRecommendTask
   }
 }

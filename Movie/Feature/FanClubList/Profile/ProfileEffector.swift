@@ -24,13 +24,16 @@ extension ProfileEffector {
       
       return [
         .init(
+          name: "fastx",
           image: UIImage(named: "fastx"),
           title: "분노의 질주"),
         .init(
+          name: "transformer",
           image: UIImage(
           named: "transformer"),
               title: "트랜스포머"),
         .init(
+          name: "spiderman",
           image: UIImage(named: "spiderman"),
           title: "스파이더맨"),
       ]

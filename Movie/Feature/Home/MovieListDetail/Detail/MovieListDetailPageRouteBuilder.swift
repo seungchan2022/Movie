@@ -2,7 +2,6 @@ import Foundation
 import Platform
 import SwiftUI
 
-
 struct MovieListDetailPageRouteBuilder: FeatureBuildType {
   var featureName: String {
     Link.movieListDetail.rawValue

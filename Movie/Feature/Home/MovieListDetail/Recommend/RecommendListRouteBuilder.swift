@@ -1,9 +1,9 @@
 import Foundation
 import SwiftUI
 
-struct CastListRouteBuilder: FeatureBuildType {
+struct RecommendListRouteBuilder: FeatureBuildType {
   var featureName: String {
-    Link.castList.rawValue
+    Link.recommendList.rawValue
   }
   
   func build(items: [String : String], diContainer: DIContainerType, navigator: NavigatorType) -> UIViewController {
@@ -11,12 +11,13 @@ struct CastListRouteBuilder: FeatureBuildType {
     guard let container = diContainer as? UseCaseDIContainer else { return .init() }
     
     return UIHostingController(
-      rootView: CastListPage(
+      rootView: RecommendListPage(
         viewStore: .init(
           initialState: .init(
             movieItemID: items.getValue(key: "movieItemID")),
           effector: .init(
             navigator: navigator,
             diContainer: container))))
+
   }
 }

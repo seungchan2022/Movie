@@ -3,48 +3,47 @@ import DesignSystem
 import SwiftUI
 import Platform
 
-struct CastListPage {
-  @ObservedObject var viewStore: CastListStore
+struct CrewListPage {
+  @ObservedObject var viewStore: CrewListStore
 }
 
-extension CastListPage {
-  var state: CastListStore.State {
+extension CrewListPage {
+  var state: CrewListStore.State {
     viewStore.state
   }
   
   var isLoading: Bool {
-    print("AA state.fetchCastData.isLoading", state.fetchCastData.isLoading)
+    print("AA state.fetchCrewData.isLoading", state.fetchCrewData.isLoading)
     
-    return state.fetchCastData.isLoading
+    return state.fetchCrewData.isLoading
   }
   
-  var castItemList: [MovieAPIModel.Detail.Credit.Response.Cast]? {
-    guard let castList = state.fetchCastData.value?.castList else {
+  var crewItemList: [MovieAPIModel.Detail.Credit.Response.Crew]? {
+    guard let crewList = state.fetchCrewData.value?.crewList else {
       return nil
     }
     
-    var uniqueCastId = Set<Int>()
-    var uniqueCastList = [MovieAPIModel.Detail.Credit.Response.Cast]()
+    var uniqueCrewId = Set<Int>()
+    var uniqueCrewList = [MovieAPIModel.Detail.Credit.Response.Crew]()
     
-    for castMember in castList {
-      if !uniqueCastId.contains(castMember.id) {
-        uniqueCastId.insert(castMember.id)
-        uniqueCastList.append(castMember)
+    for crewMember in crewList {
+      if !uniqueCrewId.contains(crewMember.id) {
+        uniqueCrewId.insert(crewMember.id)
+        uniqueCrewList.append(crewMember)
       }
     }
-    return uniqueCastList
+    return uniqueCrewList
   }
 }
 
-extension CastListPage: View {
+extension CrewListPage: View {
   var body: some View {
     ScrollView {
       LazyVStack {
-        if let castItemList {
-          ForEach(castItemList) { item in
+        if let crewItemList {
+          ForEach(crewItemList) { item in
             VStack {
-              Button(action: { print(item.name) }) {
-                //              Divider()
+              Button(action: { print(item.name )}) {
                 HStack {
                   if let imageURL = item.profileImage?.imagePath {
                     RemoteImage(url: imageURL)
@@ -59,7 +58,7 @@ extension CastListPage: View {
                   
                   VStack(alignment: .leading, spacing: 8) {
                     Text(item.name)
-                    Text(item.character)
+                    Text(item.department)
                       .font(.subheadline)
                       .foregroundColor(AppColor.Label.base2)
                   }
@@ -73,29 +72,27 @@ extension CastListPage: View {
                 }
                 .padding(12)
               }
-             .foregroundColor(Color(.label))
+              .foregroundColor(Color(.label))
             }
             Divider()
           }
         }
       }
-      
       .background(
         RoundedRectangle(cornerRadius: 10)
           .fill(AppColor.Background.base)
       )
-      .padding(.horizontal, 16)
+      .padding(.horizontal ,16)
     }
     .background(AppColor.Background.base2)
-
-    .navigationTitle("Cast")
+    
+    .navigationTitle("Crew")
     .setLoading(isLoading)
     .onAppear {
       viewStore.send(.loadItem)
     }
   }
 }
-
 extension String {
   fileprivate var imagePath: String {
     MovieAPIConst.imageBaseURL + self

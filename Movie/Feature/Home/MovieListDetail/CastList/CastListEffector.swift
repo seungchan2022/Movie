@@ -9,26 +9,37 @@ struct CastListEffector {
 
 extension CastListEffector {
   // 프로필 디테일 페이지
-  
+
   // 프로필 데이터
-  var itemList: (String) async -> CastListStore.Action {
-    {
+
+  var cast: (String) async -> CastListStore.Action {
+    { movieID in
       do {
-        let result = try await diContainer.creditAPI.getCreidtTask($0)
-        return .fetchItemList([result.serialized])
+        let item = try await diContainer.creditAPI.getCastTask(movieID)
+        
+        return .fetchCast(.success(item))
       } catch {
         print("Cast error ", error)
-        return .fetchItemList([])
+        return .fetchCast(.failure(error.serialized()))
       }
     }
   }
 }
 
-extension MovieAPIModel.Detail.Credit.Response {
-  fileprivate var serialized: CastListStore.State.ScopeItem {
-    .init(
-      id: id,
-      cast: cast.map(\.name)
-    )
+//extension MovieAPIModel.Detail.Credit.Response.Cast {
+//  fileprivate var serialized: CastListStore.State.ScopeItem {
+//    .init(
+//      id: id, // cast id
+//      name: name,
+//      character: character,
+//      profileImage: profileImage?.imagePath ?? ""
+//    )
+//  }
+//}
+
+extension String {
+  fileprivate var imagePath: String {
+    MovieAPIConst.imageBaseURL + self
   }
 }
+

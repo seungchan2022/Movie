@@ -10,4 +10,7 @@ enum Link: String {
   case castList
   case director
   case profile
+  case crewList
+  case similarList
+  case recommendList
 }

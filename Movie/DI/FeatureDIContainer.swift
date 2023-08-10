@@ -15,6 +15,9 @@ struct FeatureDIContainer {
     CastListRouteBuilder(),
     DirectorPageRouteBuilder(),
     ProfileRouteBuilder(),
+    CrewListRouteBuilder(),
+    SimilarListRouteBuilder(),
+    RecommendListRouteBuilder(),
     ]
   }
 }

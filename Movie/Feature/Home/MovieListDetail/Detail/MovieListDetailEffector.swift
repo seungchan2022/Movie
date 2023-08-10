@@ -10,71 +10,136 @@ struct MovieListDetailEffector {
 
 extension MovieListDetailEffector {
   @MainActor
-  var routeToReviews: (MovieListDetailStore.State.ScopeItem) -> Void {
-    { item in
-        navigator.push(
-          featureName: Link.reviews.rawValue,
-          items: ["movieItemID": "\(item.id)"],
-          isAnimation: true)
+  var routeToReviews: (String) async -> Void {
+    { id in
+      navigator.push(
+        featureName: Link.reviews.rawValue,
+        items: ["movieItemID": id],
+        isAnimation: true)
     }
   }
   
   @MainActor
-  var routeToCastList: (MovieListDetailStore.State.ScopeItem) -> Void {
-    { item in
-        navigator.push(
-          featureName: Link.castList.rawValue,
-          items: ["movieItemID": "\(item.id)"],
-          isAnimation: true)
+  var routeToCastList: (String) async -> Void {
+    { id in
+      navigator.push(
+        featureName: Link.castList.rawValue,
+        items: ["movieItemID": id],
+        isAnimation: true)
     }
   }
   
   @MainActor
-  var routeToDirector: (MovieListDetailStore.State.ScopeItem) -> Void {
-    { item in
-        navigator.push(
-          featureName: Link.director.rawValue,
-          items: ["movieItemID": "\(item.id)"],
-          isAnimation: true)
+  var routeToDirector: (String) async -> Void {
+    { id in
+      navigator.push(
+        featureName: Link.director.rawValue,
+        items: ["movieItemID": id],
+        isAnimation: true)
     }
   }
   
   @MainActor
-  var itemList: (String) async -> MovieListDetailStore.Action {
-    {
+  var routeToCrewList: (String) async -> Void {
+    { id in
+      navigator.push(
+        featureName: Link.crewList.rawValue,
+        items: ["movieItemID": id],
+        isAnimation: true)
+    }
+  }
+  
+  @MainActor
+  var routeToSimilarList: (String) async -> Void {
+    { id in
+      navigator.push(
+        featureName: Link.similarList.rawValue,
+        items: ["movieItemID": id],
+        isAnimation: true)
+    }
+  }
+  
+  @MainActor
+  var routeToRecommendList: (String) async -> Void {
+    { id in
+      navigator.push(
+        featureName: Link.recommendList.rawValue,
+        items: ["movieItemID": id],
+        isAnimation: true)
+    }
+  }
+
+  var movieDetail: (String) async -> MovieListDetailStore.Action {
+    { movieID in
       do {
-        let result = try await diContainer.movieDetailAPI.getDetailTask($0)
-        return .fetchItemList([result.serialized])
+        let item = try await diContainer.movieDetailAPI.getDetailTask(movieID)
+        print("AAA movieDetail")
+        return .fetchMovie(.success(item))
       } catch {
-        print("AA Error ", error)
-        return .fetchItemList([])
+        print("AAA error movieDetail ", error)
+        return .fetchMovie(.failure(error.serialized()))
       }
     }
   }
-}
-
-extension MovieAPIModel.Detail.Movie.Response {
-  fileprivate var serialized:
-    MovieListDetailStore.State.ScopeItem {
-      .init(
-        id: id,
-        title: title,
-        imageURL: posterPath?.imagePath ?? "",
-        releaseDate: releaseDate, // 날짜
-        runningTime: runtime, // 시간
-        status: "Released",
-//          status: status,
-        country: productionCountries.map(\.name),
-        voteAverage: voteAverage * 10,
-        voteCount: voteCount,
-        geners: genres.map(\.name),
-        reviews: "reviews",
-        overview: overView,
-//        keywords: keywords.map(\.name),
-//        keywords: keywords,
-        keywords: ["ketwro", "dfdf"],
-//        keywords: [],
-        director: "")
+  
+  var reviewDetail: (String) async -> MovieListDetailStore.Action {
+    { movieID in
+      do {
+        let item = try await diContainer.reviewAPI.getReviewTask(movieID)
+        return .fetchReview(.success(item))
+      } catch {
+        print("AA Error review ", error)
+        return .fetchReview(.failure(error.serialized()))
+      }
+    }
+   }
+  
+  var castDetail: (String) async -> MovieListDetailStore.Action {
+    { movieID in
+      do {
+        let item = try await diContainer.creditAPI.getCastTask(movieID)
+        return .fetchCast(.success(item))
+      } catch {
+        print("AA Error cast ", error)
+        return .fetchCast(.failure(error.serialized()))
+      }
+    }
+  }
+  
+  var crewDetail: (String) async -> MovieListDetailStore.Action {
+    { movieID in
+      do {
+        let item = try await diContainer.creditAPI.getCrewTask(movieID)
+        return .fetchCrew(.success(item))
+      } catch {
+        print("AA Error crew ", error)
+        return .fetchCast(.failure(error.serialized()))
+      }
+    }
+  }
+  
+  var similarDetail: (String) async -> MovieListDetailStore.Action {
+    { movieID in
+      do {
+        let item = try await diContainer.similarAPI.getSimilarTask(movieID)
+        return .fetchSimilar(.success(item))
+      } catch {
+        print("AA Error similar ", error)
+        return .fetchSimilar(.failure(error.serialized()))
+      }
+    }
+  }
+  
+  var recommendDetail: (String) async -> MovieListDetailStore.Action {
+    { movieID in
+      do {
+        let item = try await diContainer.recommendAPI.getRecommendTask(movieID)
+        return .fetchRecommend(.success(item))
+      } catch {
+        print("AA Error recommend ", error)
+        return .fetchRecommend(.failure(error.serialized()))
+      }
+    }
   }
 }
 

@@ -15,8 +15,8 @@ extension DirectorPage {
 extension DirectorPage: View {
   var body: some View {
     VStack {
-      if let selecedItem = state.itemList.first(where: { $0.movieItemId == state.movieItemID}) {
-        Text(selecedItem.name)
+      if let selectedItem = state.itemList.first(where: { $0.movieItemId == state.movieItemID}) {
+        Text(selectedItem.name)
       }
     }
     .onAppear {

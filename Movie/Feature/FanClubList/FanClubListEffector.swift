@@ -38,17 +38,16 @@ extension FanClubListEffector {
           work: "Selina's Gold, Eva, Silip Sa Apoy"),
         .init(
           profileImageURL: UIImage(named: "angeli"),
-          name: "Angeli Khan",
+          name: "Angeli Khan 1",
           work: "Selina's Gold, Eva, Silip Sa Apoy"),
         .init(
           profileImageURL: UIImage(named: "angeli"),
-          name: "Angeli Khan",
+          name: "Angeli Khan 2",
           work: "Selina's Gold, Eva, Silip Sa Apoy"),
         .init(
           profileImageURL: UIImage(named: "angeli"),
-          name: "Angeli Khan",
+          name: "Angeli Khan 3",
           work: "Selina's Gold, Eva, Silip Sa Apoy"),
-
       ]
     }
   }

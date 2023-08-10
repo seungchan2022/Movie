@@ -7,181 +7,188 @@ struct MovieListDetailPage {
   @State private var wishListSelected = false
   @State private var seenListSelected = false
   @State private var isActionSheetShowing = false
-  
 }
 
 extension MovieListDetailPage {
   var state: MovieListDetailStore.State {
     viewStore.state
   }
+  
+  var isLoading: Bool {
+    print("AA state.fetchMovieData.isLoading", state.fetchMovieData.isLoading)
+    print("AA state.fetchReviewData.isLoding", state.fetchReviewData.isLoading)
+    
+    return state.fetchMovieData.isLoading
+    || state.fetchReviewData.isLoading
+  }
+  
+  var addOrRemoveDescription: String {
+    guard let title = state.fetchMovieData.value?.title else { return ""}
+    return "Add or remove \(title) from your lists"
+  }
+  
+  var selectedDescription: String {
+    seenListSelected ? "Remove from seenList" : "Add to seenList"
+  }
+  
+  private var movieCardComponentViewState: MovieCardComponent.ViewState {
+    .init(movie: state.fetchMovieData.value)
+  }
+  
+  private var listButtonComponentViewState: ListButtonCompoenent.ViewState {
+    .init()
+  }
+  
+  private var movieReviewComponentViewState: MovieReviewComponent.ViewState {
+    .init(review: state.fetchReviewData.value)
+  }
+  
+  private var movieOverViewComponentViewState: MovieOverviewComponent.ViewState {
+    .init(movie: state.fetchMovieData.value)
+  }
+  
+  private var movieKeywordComponentViewState: MovieKeywordsComponent.ViewState {
+    .init(movie: state.fetchMovieData.value)
+  }
+  
+  // review처럼 다른 API를 같이 쏠 것임 -> 일단 먼저 틀잡기
+  private var movieCastComponentViewState: MovieCastComponent.ViewState {
+    .init(cast: state.fetchCastData.value)
+  }
+  
+  private var movieDirectorComponentViewState: MovieDirectorComponent.ViewState {
+    .init()
+  }
+  
+  private var movieCrewComponentViewState: MovieCrewComponent.ViewState {
+    .init(crew: state.fetchCrewData.value)
+  }
+  
+  private var similarListComponentViewState: SimilarListComponent.ViewState {
+    .init(similar: state.fetchSimilarData.value)
+  }
+  
+  private var recommendListComponentViewState: RecommendListComponent.ViewState {
+    .init(recommend: state.fetchRecommendData.value)
+  }
 }
 
 extension MovieListDetailPage: View {
   var body: some View {
-    List{
-      if let selectedItem = state.itemList.first(where: { "\($0.id)" == state.movieItemID }) {
-        Section {
-          MovieCardComponent(
-            viewState: .init(item: selectedItem))
-          .listRowBackground(RadialGradient(colors: [.gray, .black], center: .center, startRadius: 0, endRadius: 270))
-          .onAppear {
-            viewStore.send(.loadItemList)
-          }
-          
-          VStack {  // wishlist, seenlist
-            HStack {
-              Button(action: {
-                wishListSelected.toggle()
-                seenListSelected = false
-              }) {
-                HStack(spacing: 2) {
-                  if wishListSelected {
-                    Image(systemName: "heart.fill")
-                      .renderingMode(.template)
-                    Text("In wishlist")
-                      .font(.subheadline)
-                      .fontWeight(.bold)
-                  } else {
-                    Image(systemName: "heart")
-                      .foregroundColor(AppColor.Tint.primary)
-                    Text("Wishlist")
-                      .font(.subheadline)
-                      .fontWeight(.bold)
-                      .foregroundColor(AppColor.Tint.primary)
-                  }
-                }
-                .foregroundColor(.white)
-                
-              }
-              .frame(width: wishListSelected ? 120 : 100, height: 30, alignment: .center)
-              .background(
-                RoundedRectangle(cornerRadius: 5)
-                  .stroke(wishListSelected ? Color(.clear) : AppColor.Tint.primary, lineWidth: 1)
-                  .background(
-                    RoundedRectangle(cornerRadius: 5)
-                      .fill(wishListSelected ? AppColor.Tint.primary : .clear)
-                  )
-              )
-              
-              Button(action: {
-                wishListSelected = false
-                seenListSelected.toggle()
-              }) {
-                HStack(spacing: 2) {
-                  if seenListSelected {
-                    Image(systemName: "eye.fill")
-                      .renderingMode(.template)
-                    Text("Seen")
-                      .font(.subheadline)
-                      .fontWeight(.bold)
-                  } else {
-                    Image(systemName: "eye")
-                      .foregroundColor(AppColor.Tint.secondary)
-                    Text("Seenlist")
-                      .font(.subheadline)
-                      .fontWeight(.bold)
-                      .foregroundColor(AppColor.Tint.secondary)
-                  }
-                }
-                .foregroundColor(.white)
-                
-              }
-              .frame(width: seenListSelected ? 80 : 100, height: 30, alignment: .center)
-              .background(
-                RoundedRectangle(cornerRadius: 5)
-                  .stroke(seenListSelected ? Color(.clear) : AppColor.Tint.secondary, lineWidth: 1)
-                  .background(
-                    RoundedRectangle(cornerRadius: 5)
-                      .fill(seenListSelected ? AppColor.Tint.secondary : .clear)
-                  )
-              )
-              
-              Button(action: { isActionSheetShowing = true }) {
-                HStack(spacing: 2) {
-                  Image(systemName: "pin")
-                  Text("List")
-                }
-              }
-              .confirmationDialog(
-                "Add or remove \(state.itemList.first(where: { "\($0.id)" ==  state.movieItemID })?.title ?? "") from yout lists",
-                isPresented: $isActionSheetShowing,
-                titleVisibility: .visible)
-              {
-                Button(
-                  wishListSelected ? "Remove from wishlist" : "Add to wishlist",
-                  role: wishListSelected ? .destructive : .none,
-                  action: {
-                    wishListSelected.toggle()
-                    seenListSelected = false
-                  })
-                
-                Button(
-                  seenListSelected ? "Remove from seenList" : "Add to seenlist",
-                  role: seenListSelected ? .destructive : .none,
-                  action: {
-                    seenListSelected.toggle()
-                    wishListSelected = false
-                  })
-                
-                Button("Create list", role: .none, action: { print("Did tap create list")})
-                
-                
-                Button("Cancel", role: .cancel, action: { print("Cancel")})
-              }
-              
-              .frame(width: 60, height: 30, alignment: .center)
-              .foregroundColor(AppColor.Label.base)
-              .background(
-                RoundedRectangle(cornerRadius: 5)
-                  .stroke(AppColor.Label.base, lineWidth: 1)
-              )
-              Spacer()
-            } // list 버튼들
-            .buttonStyle(.plain)
-          }
-          .padding(.top, 10)
-          
-          // 솔직히 이거는 Component로 나누는게 맞나?
-          // => 근데 다음과 같이 나누지 않고 이 상태로 이동은 어떻게....
-          //          Text(selectedItem.reviews)
-          //            .foregroundColor(Color(.systemMint))
-          //            .onTapGesture {
-          //              //              viewStore.send(.onTapReviews($0))
-          //            }
-          
-            
-            MovieReviewComponent(
-              viewState: .init(item: selectedItem),
-              tapAction: { viewStore.send(.onTapReviews($0)) })
-          
-          
-          MovieOverviewComponent(viewState: .init(item: selectedItem))
-        } // overview까지
+
+    ScrollView {
+      VStack(spacing: 16) {
+        MovieCardComponent(
+          viewState: movieCardComponentViewState)
         
-        Section {
-          MovieKeywordsComponent(viewState: .init(item: selectedItem)) // keyword
+        Group {
+          ListButtonCompoenent(
+            viewState: .init(),
+            wishListSelected: $wishListSelected,
+            seenListSelected: $seenListSelected,
+            isActionSheetShowing: $isActionSheetShowing)
           
-          MovieCastComponent(viewState: .init(item: selectedItem), tapAction: { viewStore.send(.onTapCastList($0))})
+          Divider()
           
-          MovieDirectorComponent(viewState: .init(item: selectedItem), tapAction: { viewStore.send(.onTapDirector($0))})
+          MovieReviewComponent(
+            viewState: movieReviewComponentViewState,
+            tapAction: { viewStore.send(.onTapReview) })
+          
+          Divider()
+          
+          MovieOverviewComponent(viewState: movieOverViewComponentViewState)
+        } // overview까지
+        .padding(.horizontal, 12)
+      }
+      .background(
+        RoundedRectangle(cornerRadius: 10)
+          .fill(AppColor.Background.base)
+      )
+      .padding(.horizontal, 16)
+      
+      // List에서는 Secion을 나누면 다음 Section과 알아서 나누어지 지는데 ScrollView에서는 그렇지 않으므로 Divider를 커스텀해서 사용해봄
+      // -> Divider를 사용했는데 Color.clear 해도 선이 계속 나옴
+      // -> 따라서 다음과 같이 설정
+      Rectangle()
+        .frame(height: 30)
+        .foregroundColor(Color.clear)
+      
+      VStack(spacing: 16) {
+        Group {
+          // keyword
+          MovieKeywordsComponent(
+            viewState: movieKeywordComponentViewState,
+            tapAction: { print($0) })
+          
+          Divider()
+          
+          // cast
+          MovieCastComponent(
+            viewState: movieCastComponentViewState,
+            tapAction: { viewStore.send(.onTapCastList) })
+          
+          Divider()
+          
+          // director
+          MovieDirectorComponent(
+            viewState: movieDirectorComponentViewState,
+            tapAction: { viewStore.send(.onTapDirector) })
+          
+          Divider()
+          
+          // crew
+          MovieCrewComponent(
+            viewState: movieCrewComponentViewState,
+            tapAction: { viewStore.send(.onTapCrewList) })
+          
+          Divider()
         }
-      } // selectecItem
+        .padding(.horizontal, 12)
+        
+        Group {
+          // similar movie
+          SimilarListComponent(
+            viewState: similarListComponentViewState,
+            tapAction: { viewStore.send(.onTapSimilarList) })
+          
+          Divider()
+          
+          
+          // recommend movie
+          RecommendListComponent(
+            viewState: recommendListComponentViewState,
+            tapAction: { viewStore.send(.onTapRecommendList) })
+        }
+        // other posters
+        
+        // Images
+        
+        .padding(.horizontal, 12)
+      }
+      .background(
+        RoundedRectangle(cornerRadius: 10)
+          .fill(AppColor.Background.base)
+      )
+      .padding(.horizontal ,16)
     }
-    .navigationTitle(state.movieItemID)
+    .background(AppColor.Background.base2)
+    .navigationTitle(state.fetchMovieData.value?.title ?? "")
+    
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: { isActionSheetShowing = true}) {
           Image(systemName: "text.badge.plus")
+            .foregroundColor(AppColor.Label.base)
         }
       }
     }
     .confirmationDialog(
-      "Add or remove \(state.itemList.first(where: { "\($0.id)" == state.movieItemID })?.title ?? "") from yout lists",
+      addOrRemoveDescription,
       isPresented: $isActionSheetShowing,
       titleVisibility: .visible)
     {
       Button(
-        wishListSelected ? "Remove from wishlist" : "Add to wishlist",
+        selectedDescription,
         role: wishListSelected ? .destructive : .none,
         action: {
           wishListSelected.toggle()
@@ -189,7 +196,7 @@ extension MovieListDetailPage: View {
         })
       
       Button(
-        seenListSelected ? "Remove from seenList" : "Add to seenlist",
+        selectedDescription,
         role: seenListSelected ? .destructive : .none,
         action: {
           seenListSelected.toggle()
@@ -197,14 +204,14 @@ extension MovieListDetailPage: View {
         })
       
       Button("Create list", role: .none, action: { print("Did tap create list")})
-      
-      
       Button("Cancel", role: .cancel, action: { print("Cancel")})
     }
-    .setLoading(state.isLoading)
+    .setLoading(isLoading)
+    .animation(.spring(), value: state)
     .onAppear {
-      viewStore.send(.loadItemList)
+      viewStore.send(.loadItem)
     }
   }
 }
+
 

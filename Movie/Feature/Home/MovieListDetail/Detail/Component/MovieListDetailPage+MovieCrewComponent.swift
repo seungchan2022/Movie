@@ -4,38 +4,45 @@ import DesignSystem
 import Platform
 
 extension MovieListDetailPage {
-  struct MovieCastComponent {
+  struct MovieCrewComponent {
     let viewState: ViewState
     let tapAction: () -> Void
   }
 }
 
-extension MovieListDetailPage.MovieCastComponent {
-  var itemList: [MovieAPIModel.Detail.Credit.Response.Cast]? {
-    guard let castList = viewState.cast?.castList else {
+//extension MovieListDetailPage.MovieCrewComponent {
+//  var itemList: [MovieAPIModel.Detail.Credit.Response.Crew]? {
+//   viewState.crew?.crewList
+//  }
+//}
+
+//array의 중복된 값이 있어서 중복을 제거하려고 Set로 변환시켰는데 순서가 원래 array순서로 나타내고 싶을때 사용하는 방법
+extension MovieListDetailPage.MovieCrewComponent {
+  var itemList: [MovieAPIModel.Detail.Credit.Response.Crew]? {
+    guard let crewList = viewState.crew?.crewList else {
       return nil
     }
     
-    var uniqueCastId = Set<Int>()
-    var uniqueCastList = [MovieAPIModel.Detail.Credit.Response.Cast]()
+    var uniqueCrewId = Set<Int>() // 이미 본 크루 멤버 ID를 추적
+    var uniqueCrewList = [MovieAPIModel.Detail.Credit.Response.Crew]()
     
-    for castMember in castList {
-      if !uniqueCastId.contains(castMember.id) {
-        uniqueCastId.insert(castMember.id)
-        uniqueCastList.append(castMember)
+    for crewMember in crewList {
+      if !uniqueCrewId.contains(crewMember.id) {
+        uniqueCrewId.insert(crewMember.id)
+        uniqueCrewList.append(crewMember)
       }
     }
-    return uniqueCastList
+    return uniqueCrewList
   }
 }
 
-extension MovieListDetailPage.MovieCastComponent: View {
+extension MovieListDetailPage.MovieCrewComponent: View {
   var body: some View {
     if let itemList {
       VStack {
         Button(action: { tapAction() }) {
           HStack(spacing: 8) {
-            Text("Cast")
+            Text("Crew")
               .font(.system(size: 16, weight: .bold))
               .foregroundColor(Color(.label))
             Text("See all")
@@ -51,6 +58,7 @@ extension MovieListDetailPage.MovieCastComponent: View {
           }
         }
         
+        // image에 대한 버튼을 누르면 해당 선택한 사람의 프로필로 이동하도록 구현 할 것
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 16) {
             ForEach(itemList) { item in
@@ -70,7 +78,7 @@ extension MovieListDetailPage.MovieCastComponent: View {
                   Group {
                     Text(item.name)
                       .foregroundColor(Color(.label))
-                    Text(item.character)
+                    Text(item.department)
                       .foregroundColor(AppColor.Label.base2)
                   }
                   .font(.system(size: 12, weight: .medium))
@@ -89,9 +97,9 @@ extension MovieListDetailPage.MovieCastComponent: View {
   }
 }
 
-extension MovieListDetailPage.MovieCastComponent {
+extension MovieListDetailPage.MovieCrewComponent {
   struct ViewState: Equatable {
-    let cast: MovieAPIModel.Detail.Credit.Response?
+    let crew: MovieAPIModel.Detail.Credit.Response?
   }
 }
 

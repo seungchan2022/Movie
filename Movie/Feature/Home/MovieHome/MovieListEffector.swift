@@ -31,6 +31,7 @@ extension MovieListEffector {
   
   // 여기서 날리는 Int가 페이지 번호?
   // 페이지 번호를 날리면 그에 해당 하는 페이지가 나오는 구조?
+  // 해당 하는 page에 대한 데이터가 나오도록
   var itemList: (Int) async -> MovieListStore.Action {
     { page in
       do {
@@ -48,7 +49,7 @@ extension MovieListEffector {
 extension MovieAPIModel.PlayList.Response.Item {
   fileprivate var serialized: MovieListStore.State.ScopeItem {
     .init(
-      id: id,
+      id: id, // ScopeItem.id: API의 Response의 id (둘다 movieID)
       imageURL: posterPath?.imagePath ?? "",
       title: title,
       date: releaseDate,
@@ -62,3 +63,4 @@ extension String {
     MovieAPIConst.imageBaseURL + self
   }
 }
+

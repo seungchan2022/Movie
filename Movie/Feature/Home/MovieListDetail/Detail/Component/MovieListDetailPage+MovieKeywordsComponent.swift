@@ -1,51 +1,60 @@
 import Foundation
 import SwiftUI
 import DesignSystem
+import Platform
 
 extension MovieListDetailPage {
   struct MovieKeywordsComponent {
     let viewState: ViewState
     // 나중에 눌렀을때 해당 키워드로 이동하도록
-//    let tapAction: (MovieListDetailStore.State.ScopeItem) -> Void
+    //    let tapAction: () -> Void
+    let tapAction: (MovieAPIModel.Detail.Movie.Response.Keyword) -> Void
+  }
+}
+
+extension  MovieListDetailPage.MovieKeywordsComponent {
+  var itemList: [MovieAPIModel.Detail.Movie.Response.Keyword]? {
+    viewState.movie?.keywordBucket.keywordList
   }
 }
 
 extension MovieListDetailPage.MovieKeywordsComponent: View {
   var body: some View {
-    VStack(alignment: .leading, spacing: .zero) {
-      Spacer()
-      Text("keywords")
-        .font(.system(size: 16, weight: .bold))
-      ScrollView(.horizontal, showsIndicators: false) {
-        LazyHStack(spacing: 12) {
-          
-          
-          ForEach(viewState.item.keywords.indices, id: \.self) { index in
-            Button(action: {
-              print(viewState.item.keywords[index])
-            }) {
-              Text(viewState.item.keywords[index])
-                .font(.system(size: 14, weight: .bold))
-              Image(systemName: "chevron.right")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 10, height: 10)
-
+    if let itemList {
+      VStack(alignment: .leading, spacing: 8) {
+        Text("keywords")
+          .font(.system(size: 16, weight: .bold))
+          .padding(.top, 8)
+        ScrollView(.horizontal, showsIndicators: false) {
+          LazyHStack(spacing: 12) {
+            ForEach(itemList) { item in
+              Button(action: { tapAction(item) }) {
+                Text(item.name)
+                  .font(.system(size: 14, weight: .bold))
+                Image(systemName: "chevron.right")
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+                  .frame(width: 10, height: 10)
+              }
+              .foregroundColor(Color(.label))
+              .padding(4)
+              
+              .background(
+                RoundedRectangle(cornerRadius: 10)
+                  .fill(AppColor.Background.base2))
             }
-          }
-          .foregroundColor(Color(.label))
-          .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
-          .background(RoundedRectangle(cornerRadius: 10).fill(AppColor.Background.base))
-          Spacer()
-        } // LazyHStack (keyword)
-        
+          } // LazyHStack (keyword)
+        }
       }
+    } else {
+      EmptyView()
     }
   }
 }
 
 extension MovieListDetailPage.MovieKeywordsComponent {
   struct ViewState: Equatable {
-    let item: MovieListDetailStore.State.ScopeItem
+    let movie: MovieAPIModel.Detail.Movie.Response?
   }
 }
+

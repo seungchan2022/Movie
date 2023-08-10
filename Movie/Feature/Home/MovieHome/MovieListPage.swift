@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import DesignSystem
 
 struct MovieListPage {
   // 네비게이션 버튼을 눌렀을때 버튼 이미지가 달라지고 보이는 화면이 다르게 하기위해
@@ -38,6 +39,8 @@ extension MovieListPage: View {
   
   var body: some View {
     ScrollView {
+
+
       // 서치
       VStack {
         SearchComponent(
@@ -57,20 +60,23 @@ extension MovieListPage: View {
               print("AA")
               viewStore.send(.loadItemList)
             }
+            
+            Divider()
           }
         }
       }
       .padding(.horizontal, 12)
+      
     }
-    .navigationBarTitleDisplayMode(.large)
-    .navigationTitle("Now Playing")
-    
+        .navigationTitle("Now playing")
+        .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: { viewStore.send(.onChangeSheet(true)) }) {
-            Image(systemName:"wrench.adjustable")
-          }
+        Button(action: { viewStore.send(.onChangeSheet(true)) }) {
+          Image(systemName:"wrench.adjustable")
+            .foregroundColor(AppColor.Label.base)
         }
+      }
     }
     .sheet(isPresented: isShowSheet) {
       SettingsPage()
@@ -80,6 +86,7 @@ extension MovieListPage: View {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: { isButtonClicked.toggle() }) {
           Image(systemName: isButtonClicked ?  "rectangle.grid.1x2" : "rectangle.3.group.fill")
+            .foregroundColor(AppColor.Label.base)
         }
       }
     }
@@ -105,7 +112,7 @@ extension View {
         }
         // 로딩중에 화면을 건드리지 못하게 하기 위해 백그라운드 설정
         .background(
-          Color(.systemBlue).opacity(0.7)
+          Color(.black).opacity(0.7)
         )
       }
     }

@@ -8,8 +8,7 @@ public enum AppColor {}
 extension AppColor {
   public enum Background {
     public static let base = Color("BgBase", bundle: BundleToken.bundle)
-//    public static let base1 = Color("BgBase1", bundle: BundleToken.bundle)
-//    public static let base2 = Color("BgBase2", bundle: BundleToken.bundle)
+    public static let base2 = Color("BgBase2", bundle: BundleToken.bundle)
   }
 }
 

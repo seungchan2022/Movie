@@ -8,37 +8,18 @@ struct ReviewsEffector {
 }
 
 extension ReviewsEffector {
-  
-  @MainActor
-  var itemList: (String) async -> ReviewsStore.Action {
-    {
+
+  var review: (String) async -> ReviewsStore.Action {
+    { movieID in
       do {
-        let result = try await diContainer.reviewAPI.getReviewTask($0)
-//        let list = result.itemList.map(\.serialized)
-//        return .fetchItemList(list)
-        return .fetchItemList([result.serialized])
+        let item = try await diContainer.reviewAPI.getReviewTask(movieID)
+        print("aaa review")
+        return .fetchReview(.success(item))
       } catch {
-        print("Review Error ", error)
-        return .fetchItemList([])
+        print("aaa review error ", error)
+        return .fetchReview(.failure(error.serialized()))
       }
     }
   }
 }
 
-//extension MovieAPIModel.Detail.Review.Response.Item {
-//  fileprivate var serialized: ReviewsStore.State.ScopeItem {
-//    .init(
-//      id: id,
-//      author: author,
-//      content: content
-//      )
-//  }
-//}
-
-extension MovieAPIModel.Detail.Review.Response {
-  fileprivate var serialized: ReviewsStore.State.ScopeItem {
-    .init(
-      id: id,
-      page: page)
-  }
-}
