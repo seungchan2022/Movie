@@ -16,6 +16,7 @@ extension FanClubListPage {
 extension FanClubListPage: View {
   var body: some View {
     ScrollView {
+      Text("test")
       VStack {
         Text("POPULAR PEOPLE TO ADD TO YOUR FAN CLUB")
           .font(.system(size: 14, weight: .medium))
